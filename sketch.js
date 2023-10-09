@@ -1,13 +1,21 @@
-state = "play"
+state = "startScreen"
 pindMidt = 8
 hul = []
 ball = []
 bane = []
-
+levels = []
+let levelNummer = 0;
+let spilKnap;
+let settingKnap;
 function setup() {
   createCanvas(400, 400);
-  bane = [{form:"rect",x:(width/2)-6,y:0,b:12,h:height,col:[139,69,19]},
-          {form:"rect",x:50,y:200,b:100,h:12,col:[139,69,19]}]
+  spilKnap = createButton("Spil")
+  settingKnap = createButton("Indstilling")
+  spilKnap.position((width-spilKnap.width)/2,height/3)
+  settingKnap.position((width-settingKnap.width)/2,height/3+2*settingKnap.height)
+  spilKnap.mousePressed(LevelsShow)
+  bane = [[{form:"rect",x:(width/2)-6,y:0,b:12,h:height,col:[139,69,19]},
+          {form:"rect",x:50,y:200,b:100,h:12,col:[139,69,19]}]]
   hul = [
     {form:"cir",x:width/4+pindMidt/4,y:50,d:25,col:[0]},
     {form:"cir",x:3*width/4+3*pindMidt/4,y:50,d:25,col:[0]}
@@ -16,8 +24,34 @@ function setup() {
     {form:"cir",x:width/4+pindMidt/4,y:height-25,d:15,col:[255],speed:0,dir:0},
     {form:"cir",x:3*width/4+3*pindMidt/4,y:height-25,d:15,col:[255],speed:0,dir:0}
   ]
+  Levelknapper()
   skyd = false 
 }
+function LevelsShow(){
+  for(let i =0; i<levels.length;i++){
+    levels[i].show()
+  }
+  spilKnap.hide()
+  settingKnap.hide()
+}
+
+function Levelknapper(){
+  for(let i =0; i<bane.length;i++){
+    levels.push(createButton(i+1))
+    levels[i].position((i%4+1)*width/5-levels[i].width/2,floor((i+4)/4)*height/5)
+    levels[i].mousePressed(Level)
+    levels[i].hide()
+  }
+}
+
+function Level(){
+  levelNummer = floor((mouseX-levels[0].width)*(5/width))+floor(mouseY*(5/height))*4-4
+  for(let i =0; i<levels.length;i++){
+    levels[i].hide()
+  }
+  state = "play"
+}
+
 
 function draw() {
   if (state == "play"){
@@ -42,14 +76,17 @@ function draw() {
       skyd =false
     }
   }
+  if(state == "startScreen"){
   
-  Kollison(ball,bane,hul)
+  }
+  
+  Kollison(ball,bane[levelNummer],hul)
   noStroke()
   Grid(40)
   stroke(100)
   Tegn(ball)
   Tegn(hul)
-  Tegn(bane)
+  Tegn(bane[levelNummer])
 }
 
 function Tegn(liste){
