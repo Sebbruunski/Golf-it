@@ -14,14 +14,15 @@ function setup() {
   spilKnap.position((width-spilKnap.width)/2,height/3)
   settingKnap.position((width-settingKnap.width)/2,height/3+2*settingKnap.height)
   spilKnap.mousePressed(LevelsShow)
-  bane = [[{form:"rect",x:(width/2)-6,y:0,b:12,h:height,col:[139,69,19]},
+  bane = [[{form:"rect",x:(width/2)-6,y:0,b:12,h:height,col:[139,69,19]},],
+          [{form:"rect",x:(width/2)-6,y:0,b:12,h:height,col:[139,69,19]},
           {form:"rect",x:50,y:200,b:100,h:12,col:[139,69,19]}]]
   hul = [
     {form:"cir",x:width/4+pindMidt/4,y:50,d:25,col:[0]},
     {form:"cir",x:3*width/4+3*pindMidt/4,y:50,d:25,col:[0]}
   ]
   ball = [
-    {form:"cir",x:width/4+pindMidt/4,y:height-25,d:15,col:[255,0,0],speed:0,dir:0},
+    {form:"cir",x:width/4+pindMidt/4,y:height-25,d:15,col:[255],speed:0,dir:0},
     {form:"cir",x:3*width/4+3*pindMidt/4,y:height-25,d:15,col:[255],speed:0,dir:0}
   ]
   Levelknapper()
@@ -73,7 +74,7 @@ function draw() {
           ref=1
           ball[1].col=[255,0,0]
           ball[0].col=[255]
-        }else{
+        }else if(ball[1].col.length>2||ball[0].col.length>2){
         skyd = true
         ball[1].speed =4
         ball[0].speed =4
@@ -104,6 +105,7 @@ function draw() {
   Tegn(bane[levelNummer])
   //tegn pil
   if(skyd==false){
+    if(ball[1].col.length>2||ball[0].col.length>2){
     strokeWeight(5)
     stroke(255,150,50)
     fill(255,150,50)
@@ -116,6 +118,7 @@ function draw() {
     endY=ball[(ref+1)%2].y+sin(ball[(ref+1)%2].dir)*50
     line(ball[(ref+1)%2].x,ball[(ref+1)%2].y,endX,endY)
     triangle(endX,endY,endX-cos(ball[(ref+1)%2].dir+120)*10,endY-sin(ball[(ref+1)%2].dir+120)*10,endX-cos(ball[(ref+1)%2].dir-120)*10,endY-sin(ball[(ref+1)%2].dir-120)*10)
+    }
   }
 }
 
