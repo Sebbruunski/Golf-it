@@ -21,11 +21,12 @@ function setup() {
     {form:"cir",x:3*width/4+3*pindMidt/4,y:50,d:25,col:[0]}
   ]
   ball = [
-    {form:"cir",x:width/4+pindMidt/4,y:height-25,d:15,col:[255],speed:0,dir:0},
+    {form:"cir",x:width/4+pindMidt/4,y:height-25,d:15,col:[255,0,0],speed:0,dir:0},
     {form:"cir",x:3*width/4+3*pindMidt/4,y:height-25,d:15,col:[255],speed:0,dir:0}
   ]
   Levelknapper()
   skyd = false 
+  ref=ball[0]
 }
 function LevelsShow(){
   for(let i =0; i<levels.length;i++){
@@ -60,11 +61,21 @@ function draw() {
     ball[0].y+=sin(ball[0].dir)*ball[0].speed
     ball[1].y+=sin(ball[1].dir)*ball[1].speed
     if(mouseIsPressed & skyd == false){
+      if(sqrt((mouseX-ball[0].x)**2+(mouseY-ball[0].y)**2)<=(ball[0].d*0.5)){
+        ref=ball[0]
+        ball[0].col=[255,0,0]
+        ball[1].col=[255]
+      }else if(sqrt((mouseX-ball[1].x)**2+(mouseY-ball[1].y)**2)<=(ball[1].d*0.5)){
+        ref=ball[1]
+        ball[1].col=[255,0,0]
+        ball[0].col=[255]
+      }else{
       skyd = true
-      ball[0].dir =atan2((ball[0].y-mouseY),(ball[0].x-mouseX))
-      ball[1].dir =atan2((ball[0].y-mouseY),(ball[0].x-mouseX))
+      ball[0].dir =atan2((ref.y-mouseY),(ref.x-mouseX))
+      ball[1].dir =atan2((ref.y-mouseY),(ref.x-mouseX))
       ball[1].speed =4
       ball[0].speed =4
+      }
     }
     if(ball[1].speed>0.1 &ball[0].speed>0.1){
       ball[1].speed -=0.01
@@ -136,6 +147,8 @@ function Kollison(Spiller,bane,Hul){
     for(let j = 0;j<Hul.length;j++){
       if(Hul[j].d/2+Spiller[i].d/2>sqrt((Spiller[i].x-Hul[j].x)**2+(Spiller[i].y-Hul[j].y)**2)){
         Spiller[i].d=0
+        ref=Spiller[(i+1)%2]
+        Spiller[(i+1)%2].col=[255,0,0]
       }
     }
   } 
