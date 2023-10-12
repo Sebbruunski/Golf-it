@@ -14,12 +14,14 @@ function setup() {
   spilKnap.position((width-spilKnap.width)/2,height/3)
   settingKnap.position((width-settingKnap.width)/2,height/3+2*settingKnap.height)
   spilKnap.mousePressed(LevelsShow)
-  bane = [[{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]},],
-          [{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]},
-          {form:"rect",x:width/8,y:height/2,b:width/4,h:3*height/100,col:[139,69,19]}]]
-  hul = [
-    {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},
-    {form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}
+  bane = [
+    //index 0
+    {obs: [{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}],
+    hul: [{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]
+    },
+    //index 1
+    {obs:[{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}, {form:"rect",x:width/8,y:height/2,b:width/4,h:3*height/100,col:[139,69,19]}],
+    hul:[{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]}
   ]
   ball = [
     {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
@@ -65,15 +67,14 @@ function draw() {
     if(skyd == false){
       ball[0].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
       ball[1].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
-      console.log(ball[0].dir)
       if(mouseIsPressed){
         if(sqrt((mouseX-ball[0].x)**2+(mouseY-ball[0].y)**2)<=(ball[0].d*0.5)){
           ref=0
-          ball[0].col=[255,0,0]
+          ball[0].col=[255,250,0]
           ball[1].col=[255]
         }else if(sqrt((mouseX-ball[1].x)**2+(mouseY-ball[1].y)**2)<=(ball[1].d*0.5)){
           ref=1
-          ball[1].col=[255,0,0]
+          ball[1].col=[255,250,0]
           ball[0].col=[255]
         }else if(ball[1].col.length>2||ball[0].col.length>2){
         skyd = true
@@ -97,19 +98,19 @@ function draw() {
   
   }
   
-  Kollison(ball,bane[levelNummer],hul)
+  Kollison(ball,bane[levelNummer].obs,bane[levelNummer].hul)
   noStroke()
   Grid(40)
   stroke(100)
   Tegn(ball)
-  Tegn(hul)
-  Tegn(bane[levelNummer])
+  Tegn(bane[levelNummer].hul)
+  Tegn(bane[levelNummer].obs)
   //tegn pil
   if(skyd==false){
     if(ball[1].col.length>2||ball[0].col.length>2){
     strokeWeight(width/100)
-    stroke(255,150,50)
-    fill(255,150,50)
+    stroke(255,250,0)
+    fill(255,250,0)
     endX=ball[ref].x+cos(ball[ref].dir)*width/8
     endY=ball[ref].y+sin(ball[ref].dir)*width/8
     line(ball[ref].x,ball[ref].y,endX,endY)
@@ -132,7 +133,11 @@ function Tegn(liste){
      fill(liste[i].col[0],liste[i].col[1],liste[i].col[2]) 
     }
     if(liste[i].form =="cir"){
+      strokeWeight(width/200)
+      stroke(255-255*i,100,255*i)
       circle(liste[i].x,liste[i].y,liste[i].d)
+      stroke(100)
+      strokeWeight(1)
     }
     if(liste[i].form =="rect"){
       rect(liste[i].x,liste[i].y,liste[i].b,liste[i].h)
@@ -171,7 +176,7 @@ function Kollison(Spiller,bane,Hul){
       if(Hul[j].d/2+Spiller[i].d/2>sqrt((Spiller[i].x-Hul[j].x)**2+(Spiller[i].y-Hul[j].y)**2)){
         Spiller[i].d=0
         ref=(i+1)%2
-        Spiller[ref].col=[255,0,0]
+        Spiller[ref].col=[255,250,0]
       }
     }
   } 
