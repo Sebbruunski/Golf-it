@@ -77,14 +77,14 @@ function draw() {
           ball[0].col=[255]
         }else if(ball[1].col.length>2||ball[0].col.length>2){
         skyd = true
-        ball[1].speed =4
-        ball[0].speed =4
+        ball[1].speed =width/100
+        ball[0].speed =width/100
         }
       }
     }
-    if(ball[1].speed>0.1 &ball[0].speed>0.1){
-      ball[1].speed -=0.01
-      ball[0].speed -=0.01
+    if(ball[1].speed>width/4000 &ball[0].speed>width/4000){
+      ball[1].speed -=width/40000
+      ball[0].speed -=width/40000
     }
     else{ 
       ball[1].speed =0
@@ -107,18 +107,18 @@ function draw() {
   //tegn pil
   if(skyd==false){
     if(ball[1].col.length>2||ball[0].col.length>2){
-    strokeWeight(5)
+    strokeWeight(width/100)
     stroke(255,150,50)
     fill(255,150,50)
-    endX=ball[ref].x+cos(ball[ref].dir)*50
-    endY=ball[ref].y+sin(ball[ref].dir)*50
+    endX=ball[ref].x+cos(ball[ref].dir)*width/8
+    endY=ball[ref].y+sin(ball[ref].dir)*width/8
     line(ball[ref].x,ball[ref].y,endX,endY)
-    triangle(endX,endY,endX-cos(ball[ref].dir+120)*10,endY-sin(ball[ref].dir+120)*10,endX-cos(ball[ref].dir-120)*10,endY-sin(ball[ref].dir-120)*10)
-    strokeWeight(2)
-    endX=ball[(ref+1)%2].x+cos(ball[(ref+1)%2].dir)*50
-    endY=ball[(ref+1)%2].y+sin(ball[(ref+1)%2].dir)*50
+    triangle(endX,endY,endX-cos(ball[ref].dir+120)*width/40,endY-sin(ball[ref].dir+120)*width/40,endX-cos(ball[ref].dir-120)*width/40,endY-sin(ball[ref].dir-120)*width/40)
+    strokeWeight(width/200)
+    endX=ball[(ref+1)%2].x+cos(ball[(ref+1)%2].dir)*width/8
+    endY=ball[(ref+1)%2].y+sin(ball[(ref+1)%2].dir)*width/8
     line(ball[(ref+1)%2].x,ball[(ref+1)%2].y,endX,endY)
-    triangle(endX,endY,endX-cos(ball[(ref+1)%2].dir+120)*10,endY-sin(ball[(ref+1)%2].dir+120)*10,endX-cos(ball[(ref+1)%2].dir-120)*10,endY-sin(ball[(ref+1)%2].dir-120)*10)
+    triangle(endX,endY,endX-cos(ball[(ref+1)%2].dir+120)*width/40,endY-sin(ball[(ref+1)%2].dir+120)*width/40,endX-cos(ball[(ref+1)%2].dir-120)*width/40,endY-sin(ball[(ref+1)%2].dir-120)*width/40)
     }
   }
 }
@@ -142,10 +142,10 @@ function Tegn(liste){
 
 function Kollison(Spiller,bane,Hul){
   for(let i = 0;i<Spiller.length;i++){
-    if(Spiller[i].x-Spiller[i].d/2<0||Spiller[i].x+Spiller[i].d/2>400){
+    if(Spiller[i].x-Spiller[i].d/2<0||Spiller[i].x+Spiller[i].d/2>width){
       Spiller[i].dir =90*(PI/2)-Spiller[i].dir
     }
-    if(Spiller[i].y-Spiller[i].d/2<0||Spiller[i].y+Spiller[i].d/2>400){
+    if(Spiller[i].y-Spiller[i].d/2<0||Spiller[i].y+Spiller[i].d/2>height){
       ball[i].dir =Spiller[i].dir*(-1)
     }
     for(let j = 0;j<bane.length;j++){
