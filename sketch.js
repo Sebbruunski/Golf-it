@@ -8,7 +8,7 @@ let levelNummer = 0;
 let spilKnap;
 let settingKnap;
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(600, 600);
   spilKnap = createButton("Spil")
   settingKnap = createButton("Indstilling")
   spilKnap.position((width-spilKnap.width)/2,height/3)
