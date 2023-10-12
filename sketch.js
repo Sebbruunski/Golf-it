@@ -8,22 +8,22 @@ let levelNummer = 0;
 let spilKnap;
 let settingKnap;
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 800);
   spilKnap = createButton("Spil")
   settingKnap = createButton("Indstilling")
   spilKnap.position((width-spilKnap.width)/2,height/3)
   settingKnap.position((width-settingKnap.width)/2,height/3+2*settingKnap.height)
   spilKnap.mousePressed(LevelsShow)
-  bane = [[{form:"rect",x:(width/2)-6,y:0,b:12,h:height,col:[139,69,19]},],
-          [{form:"rect",x:(width/2)-6,y:0,b:12,h:height,col:[139,69,19]},
-          {form:"rect",x:50,y:200,b:100,h:12,col:[139,69,19]}]]
+  bane = [[{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]},],
+          [{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]},
+          {form:"rect",x:width/8,y:height/2,b:width/4,h:3*height/100,col:[139,69,19]}]]
   hul = [
-    {form:"cir",x:width/4+pindMidt/4,y:50,d:25,col:[0]},
-    {form:"cir",x:3*width/4+3*pindMidt/4,y:50,d:25,col:[0]}
+    {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},
+    {form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}
   ]
   ball = [
-    {form:"cir",x:width/4+pindMidt/4,y:height-25,d:15,col:[255],speed:0,dir:0},
-    {form:"cir",x:3*width/4+3*pindMidt/4,y:height-25,d:15,col:[255],speed:0,dir:0}
+    {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+    {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}
   ]
   Levelknapper()
   skyd = false 
@@ -65,6 +65,7 @@ function draw() {
     if(skyd == false){
       ball[0].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
       ball[1].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
+      console.log(ball[0].dir)
       if(mouseIsPressed){
         if(sqrt((mouseX-ball[0].x)**2+(mouseY-ball[0].y)**2)<=(ball[0].d*0.5)){
           ref=0
