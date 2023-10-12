@@ -65,7 +65,6 @@ function draw() {
     if(skyd == false){
       ball[0].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
       ball[1].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
-      console.log(ball[0].dir)
       if(mouseIsPressed){
         if(sqrt((mouseX-ball[0].x)**2+(mouseY-ball[0].y)**2)<=(ball[0].d*0.5)){
           ref=0
