@@ -6,14 +6,32 @@ bane = []
 levels = []
 let levelNummer = 0;
 let spilKnap;
+let shopKnap;
 let settingKnap;
+let tilbageKnap;
+shopTing = []
 function setup() {
   createCanvas(600, 600);
+  tilbageKnap = createButton("Tilbage")
+  shopKnap = createButton("Shop")
   spilKnap = createButton("Spil")
   settingKnap = createButton("Indstilling")
+  tilbageKnap.position(0,7*height/8)
+  shopKnap.position((width-shopKnap.width)/2,height/3+1.5*settingKnap.height)
   spilKnap.position((width-spilKnap.width)/2,height/3)
-  settingKnap.position((width-settingKnap.width)/2,height/3+2*settingKnap.height)
+  settingKnap.position((width-settingKnap.width)/2,height/3+3*settingKnap.height)
   spilKnap.mousePressed(LevelsShow)
+  shopKnap.mousePressed(ShopShow)
+  tilbageKnap.mousePressed(StartScreen)
+  settingKnap.mousePressed(SettingShow)
+  tilbageKnap.hide()
+  shopTing = [createImg("CowboyHat.webp",""),createImg("Cap.png","")]
+  for(let i = 0; i<shopTing.length;i++){
+    shopTing[i].size(width/8,height/8) 
+    shopTing[i].position((i%4+1)*width/5-shopTing[i].width/2,floor((i+4)/4)*height/5)
+    shopTing[i].hide()
+  }
+
   bane = [[{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]},],
           [{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]},
           {form:"rect",x:width/8,y:height/2,b:width/4,h:3*height/100,col:[139,69,19]}]]
@@ -29,12 +47,45 @@ function setup() {
   skyd = false 
   ref=0
 }
+function SettingShow(){
+  tilbageKnap.show()
+  spilKnap.hide()
+  settingKnap.hide()
+  shopKnap.hide()
+}
+
+function StartScreen(){
+  tilbageKnap.hide()
+  spilKnap.show()
+  settingKnap.show()
+  shopKnap.show()
+  for(let i =0; i<levels.length;i++){
+    levels[i].hide()
+  }
+  for(let i =0; i<shopTing.length;i++){
+    shopTing[i].hide()
+  }
+
+}
+
+function ShopShow(){
+  for(let i = 0;i<shopTing.length;i++){
+    shopTing[i].show()
+  }
+  spilKnap.hide()
+  shopKnap.hide()
+  settingKnap.hide()
+  tilbageKnap.show()
+}
+
 function LevelsShow(){
   for(let i =0; i<levels.length;i++){
     levels[i].show()
   }
   spilKnap.hide()
+  shopKnap.hide()
   settingKnap.hide()
+  tilbageKnap.show()
 }
 
 function Levelknapper(){
@@ -51,13 +102,13 @@ function Level(){
   for(let i =0; i<levels.length;i++){
     levels[i].hide()
   }
+  tilbageKnap.hide()
   state = "play"
 }
 
 
 function draw() {
   if (state == "play"){
-    
     ball[0].x+=cos(ball[0].dir)*ball[0].speed
     ball[1].x+=cos(ball[1].dir)*ball[1].speed
     ball[0].y+=sin(ball[0].dir)*ball[0].speed
@@ -114,10 +165,12 @@ function draw() {
     line(ball[ref].x,ball[ref].y,endX,endY)
     triangle(endX,endY,endX-cos(ball[ref].dir+120)*width/40,endY-sin(ball[ref].dir+120)*width/40,endX-cos(ball[ref].dir-120)*width/40,endY-sin(ball[ref].dir-120)*width/40)
     strokeWeight(width/200)
-    endX=ball[(ref+1)%2].x+cos(ball[(ref+1)%2].dir)*width/8
-    endY=ball[(ref+1)%2].y+sin(ball[(ref+1)%2].dir)*width/8
-    line(ball[(ref+1)%2].x,ball[(ref+1)%2].y,endX,endY)
-    triangle(endX,endY,endX-cos(ball[(ref+1)%2].dir+120)*width/40,endY-sin(ball[(ref+1)%2].dir+120)*width/40,endX-cos(ball[(ref+1)%2].dir-120)*width/40,endY-sin(ball[(ref+1)%2].dir-120)*width/40)
+    if(ball[(ref+1)%2].d>1){
+       endX=ball[(ref+1)%2].x+cos(ball[(ref+1)%2].dir)*width/8
+       endY=ball[(ref+1)%2].y+sin(ball[(ref+1)%2].dir)*width/8
+       line(ball[(ref+1)%2].x,ball[(ref+1)%2].y,endX,endY)
+       triangle(endX,endY,endX-cos(ball[(ref+1)%2].dir+120)*width/40,endY-sin(ball[(ref+1)%2].dir+120)*width/40,endX-cos(ball[(ref+1)%2].dir-120)*width/40,endY-sin(ball[(ref+1)%2].dir-120)*width/40)
+      }  
     }
   }
 }
