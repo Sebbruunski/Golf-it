@@ -103,12 +103,28 @@ function Level(){
     levels[i].hide()
   }
   tilbageKnap.hide()
+  ball[0].x=width/4
+  ball[0].y=15*height/16
+  ball[0].d=1.5*width/40
+  ball[1].x=3*width/4
+  ball[1].y=15*height/16
+  ball[1].d=1.5*width/40
+  ball[0].col= [255]
+  ball[1].col= [255]
+  ball[0].speed=0
+  ball[1].speed=0
   state = "play"
 }
 
 
 function draw() {
   if (state == "play"){
+    if(ball[0].d<1&&ball[1].d<1){
+      state = "startScreen"
+      skyd = false
+      StartScreen()
+      ref =0
+    }
     ball[0].x+=cos(ball[0].dir)*ball[0].speed
     ball[1].x+=cos(ball[1].dir)*ball[1].speed
     ball[0].y+=sin(ball[0].dir)*ball[0].speed
@@ -160,11 +176,13 @@ function draw() {
     strokeWeight(width/100)
     stroke(255,150,50)
     fill(255,150,50)
-    endX=ball[ref].x+cos(ball[ref].dir)*width/8
-    endY=ball[ref].y+sin(ball[ref].dir)*width/8
-    line(ball[ref].x,ball[ref].y,endX,endY)
-    triangle(endX,endY,endX-cos(ball[ref].dir+120)*width/40,endY-sin(ball[ref].dir+120)*width/40,endX-cos(ball[ref].dir-120)*width/40,endY-sin(ball[ref].dir-120)*width/40)
-    strokeWeight(width/200)
+    if(ball[ref].d>1){
+      endX=ball[ref].x+cos(ball[ref].dir)*width/8
+      endY=ball[ref].y+sin(ball[ref].dir)*width/8
+      line(ball[ref].x,ball[ref].y,endX,endY)
+      triangle(endX,endY,endX-cos(ball[ref].dir+120)*width/40,endY-sin(ball[ref].dir+120)*width/40,endX-cos(ball[ref].dir-120)*width/40,endY-sin(ball[ref].dir-120)*width/40)
+      strokeWeight(width/200)
+    }
     if(ball[(ref+1)%2].d>1){
        endX=ball[(ref+1)%2].x+cos(ball[(ref+1)%2].dir)*width/8
        endY=ball[(ref+1)%2].y+sin(ball[(ref+1)%2].dir)*width/8
