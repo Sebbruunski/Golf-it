@@ -21,16 +21,25 @@ function Kollison(Spiller,bane,Hul){
             Spiller[i].dir =Spiller[i].dir*(-1)
          }
         }
+        if(bane[j].form=="line"){
+          xproj = Spiller[i].x - cos(bane[j].angle+PI/2)*(cos(bane[j].angle+PI/2)*(Spiller[i].x-bane[j].xcent) + sin(bane[j].angle+PI/2)*(Spiller[i].y-bane[j].ycent))
+          yproj = Spiller[i].y - sin(bane[j].angle+PI/2)*(cos(bane[j].angle+PI/2)*(Spiller[i].x-bane[j].xcent) + sin(bane[j].angle+PI/2)*(Spiller[i].y-bane[j].ycent))
+          if(sqrt((xproj-Spiller[i].x)**2 + (yproj-Spiller[i].y)**2) <Spiller[i].d/2){
+            if(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2) <bane[j].length){
+              Spiller[i].dir=2*bane[j].angle - Spiller[i].dir
+            }
+          }
+        }
+
         if(bane[j].form=="cir"){
           
         }
       }
-      for(let j = 0;j<Hul.length;j++){
-        if(Hul[j].d/2+Spiller[i].d/2>sqrt((Spiller[i].x-Hul[j].x)**2+(Spiller[i].y-Hul[j].y)**2)){
-          Spiller[i].d=0
-          ref=(i+1)%2
-          Spiller[ref].col=[255,0,0]
-        }
+      if(Hul[i].d/2+Spiller[i].d/2>sqrt((Spiller[i].x-Hul[i].x)**2+(Spiller[i].y-Hul[i].y)**2)){
+        Spiller[i].d=0
+        ref=(i+1)%2
+        Spiller[ref].col=[255,250,0]
+        
       }
     } 
   }

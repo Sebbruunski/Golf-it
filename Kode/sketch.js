@@ -7,12 +7,19 @@ let levelNummer = 0;
 
 function setup() {
   createCanvas(600, 600);
-  bane = [[{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]},],
-          [{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]},
-          {form:"rect",x:width/8,y:height/2,b:width/4,h:3*height/100,col:[139,69,19]}]]
-  hul = [
-    {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},
-    {form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}
+  bane = [
+    //index 0
+    {obs: [{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}],
+    hul: [{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]
+    },
+    //index 1
+    {obs:[{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}, {form:"rect",x:width/8,y:height/2,b:width/4,h:3*height/100,col:[139,69,19]}],
+    hul:[{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]
+    },
+    //index 2
+    {obs:[{form: "line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4, col:[139,69,19]}],
+    hul:[{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]
+    }
   ]
   ball = [
     {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
@@ -63,11 +70,11 @@ function draw() {
       if(mouseIsPressed){
         if(sqrt((mouseX-ball[0].x)**2+(mouseY-ball[0].y)**2)<=(ball[0].d*0.5)){
           ref=0
-          ball[0].col=[255,0,0]
+          ball[0].col=[255,250,0]
           ball[1].col=[255]
         }else if(sqrt((mouseX-ball[1].x)**2+(mouseY-ball[1].y)**2)<=(ball[1].d*0.5)){
           ref=1
-          ball[1].col=[255,0,0]
+          ball[1].col=[255,250,0]
           ball[0].col=[255]
         }else if(ball[1].col.length>2||ball[0].col.length>2){
         skyd = true
@@ -88,7 +95,7 @@ function draw() {
   }
   strokeWeight(1)
   
-  Kollison(ball,bane[levelNummer],hul)
+  Kollison(ball,bane[levelNummer].obs,bane[levelNummer].hul)
   TegnDraw()
 }
 
