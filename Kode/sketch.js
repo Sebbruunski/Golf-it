@@ -9,41 +9,56 @@ function setup() {
   createCanvas(600, 600);
   bane = [
     //index 0
-    {obs: [{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}],
-    hul: [{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]
+    {obs: [
+      {form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}],
+    hul: [
+      {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
+    ball:[
+      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     },
     //index 1
-    {obs:[{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}, {form:"rect",x:width/8,y:height/2,b:width/4,h:3*height/100,col:[139,69,19]}],
-    hul:[{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]
+    {obs:[{
+      form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}, {form:"rect",x:width/8,y:height/2,b:width/4,h:3*height/100,col:[139,69,19]}],
+    hul:[
+      {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
+    ball:[
+      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     },
     //index 2
-    {obs:[{form: "line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4, col:[139,69,19]}],
-    hul:[{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]
+    {obs:[
+      {form: "line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4, col:[139,69,19]}],
+    hul:[
+      {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
+    ball:[
+      {form:"cir",x:width/4+(random(width/8)-width/16),y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:3*width/4+(random(width/8)-width/16),y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     }
   ]
-  ball = [
+  ball=[
     {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
-    {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}
-  ]
+     {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}
+   ]
   skyd = false 
   ref=0
   MenuSetup()
 }
 
 
-//Bliver kaldt når der et tykket på et vilkårligt level.
+//Bliver kaldt når der er trykket på et vilkårligt level.
 function Level(){
   levelNummer = floor((mouseX-levelsKnapper[0].width)*(5/width))+floor(mouseY*(5/height))*4-4  //Finder det level man har trykket på.
   for(let i =0; i<levelsKnapper.length;i++){
     levelsKnapper[i].hide()
   }
   tilbageKnap.hide()
-  ball[0].x=width/4
-  ball[0].y=15*height/16
-  ball[0].d=1.5*width/40
-  ball[1].x=3*width/4
-  ball[1].y=15*height/16
-  ball[1].d=1.5*width/40
+  ball[0].x=bane[levelNummer].ball[0].x
+  ball[0].y=bane[levelNummer].ball[0].y
+  ball[0].d=bane[levelNummer].ball[0].d
+  ball[1].x=bane[levelNummer].ball[1].x
+  ball[1].y=bane[levelNummer].ball[1].y
+  ball[1].d=bane[levelNummer].ball[1].d
   ball[0].col= [255]
   ball[1].col= [255]
   ball[0].speed=0
