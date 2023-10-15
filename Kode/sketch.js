@@ -28,7 +28,7 @@ function setup() {
     },
     //index 2
     {obs:[
-      {form: "line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4, col:[139,69,19]}],
+      {form: "line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4,t:50, col:[139,69,19]}],
     hul:[
       {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
     ball:[
