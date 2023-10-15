@@ -4,8 +4,8 @@ function TegnDraw(){
     Grid(40)
     stroke(100)
     Tegn(ball)
-    Tegn(hul)
-    Tegn(bane[levelNummer])
+    Tegn(bane[levelNummer].hul)
+    Tegn(bane[levelNummer].obs)
     //tegn pil
     if(ball[0].d<1&hat[0]!=0){
         ball[0].hat.hide() 
@@ -16,8 +16,8 @@ function TegnDraw(){
     if(skyd==false){
         if(ball[1].col.length>2||ball[0].col.length>2){
             strokeWeight(width/100)
-            stroke(255,150,50)
-             fill(255,150,50)
+            stroke(255,250,0)
+            fill(255,250,0)
             if(ball[ref].d>1){
                 endX=ball[ref].x+cos(ball[ref].dir)*width/8
                 endY=ball[ref].y+sin(ball[ref].dir)*width/8
@@ -45,12 +45,22 @@ function Tegn(liste){
         {
             fill(liste[i].col[0],liste[i].col[1],liste[i].col[2]) 
         }
-        if(liste[i].form =="cir")
-        {
+        if(liste[i].form =="cir"){
+            strokeWeight(width/200)
+            stroke(255-255*i,100,255*i)
             circle(liste[i].x,liste[i].y,liste[i].d)
+            stroke(100)
+            strokeWeight(1)
         }
         if(liste[i].form =="rect"){
             rect(liste[i].x,liste[i].y,liste[i].b,liste[i].h)
+        }
+        if(liste[i].form =="line"){
+            strokeWeight(liste[i].t)
+            stroke(liste[i].col)
+            line(liste[i].xcent+cos(liste[i].angle)*liste[i].length, liste[i].ycent+sin(liste[i].angle)*liste[i].length, liste[i].xcent-cos(liste[i].angle)*liste[i].length, liste[i].ycent-sin(liste[i].angle)*liste[i].length)
+            stroke(100)
+            strokeWeight(1)
         }
     }
 }
