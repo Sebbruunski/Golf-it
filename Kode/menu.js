@@ -2,6 +2,7 @@
 shopTing = []
 levelsKnapper = []
 chekBokse = []
+let hat = [0,0];
 let spilKnap;
 let shopKnap;
 let settingKnap;
@@ -33,14 +34,14 @@ function StartScreen(){
       levelsKnapper[i].hide()
     }
     for(let i =0; i<shopTing.length;i++){
-      shopTing[i].hide()
+      shopTing[i][1].hide()
       chekBokse[i][1].hide()
     }
 }
   
 function ShopShow(){
     for(let i = 0;i<shopTing.length;i++){
-      shopTing[i].show()
+      shopTing[i][1].show()
       chekBokse[i][1].show()
     }
     spilKnap.hide()
@@ -61,17 +62,38 @@ function levelsShow(){
 
 function ShopSetup(billedeListe){
   for(let i = 0; i<billedeListe.length;i++){
-    shopTing.push(createImg(billedeListe[i]))
-    shopTing[i].size(width/8,height/8) 
-    shopTing[i].position((i%4+1)*width/5-shopTing[i].width/2,floor((i+4)/4)*height/5)
-    shopTing[i].hide()
+    shopTing.push([billedeListe[i],createImg(billedeListe[i],"")])
+    shopTing[i][1].size(width/8,height/8) 
+    shopTing[i][1].position((i%4+1)*width/5-shopTing[i][1].width/2,floor((i+4)/4)*height/5)
+    shopTing[i][1].hide()
     chekBokse.push([false,createCheckbox("Valgt",false)])
     chekBokse[i][1].position((i%4+1)*width/5-30,floor((i+4)/4)*height/5+height/10)
+    chekBokse[i][1].changed(TjekBoks)
     chekBokse[i][1].hide()
   }
 }
 
-
+function TjekBoks(){
+  let a = hat
+  for(let i =0;i<chekBokse.length;i++){
+    if (chekBokse[i][1].checked()&hat[0]!=shopTing[i][0]){
+      a = shopTing[i]
+    } else {
+      chekBokse[i][1].checked(false)
+    }
+  }
+  if(hat == a){
+    hat = [0,0]
+  }else{
+    hat = a
+    ball[0].hat=createImg(hat[0],"")
+    ball[0].hat.size(1.5*width/40,1.5*width/40)
+    ball[1].hat=createImg(hat[0],"")
+    ball[1].hat.size(1.5*width/40,1.5*width/40)
+    ball[0].hat.hide()
+    ball[1].hat.hide()
+  }
+}
 
 function MenuSetup(){
   tilbageKnap = createButton("Tilbage")

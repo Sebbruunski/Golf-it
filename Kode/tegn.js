@@ -7,6 +7,12 @@ function TegnDraw(){
     Tegn(hul)
     Tegn(bane[levelNummer])
     //tegn pil
+    if(ball[0].d<1&hat[0]!=0){
+        ball[0].hat.hide() 
+    }
+    if(ball[1].d<1&hat[0]!=0){
+        ball[1].hat.hide() 
+    } 
     if(skyd==false){
         if(ball[1].col.length>2||ball[0].col.length>2){
             strokeWeight(width/100)
@@ -18,13 +24,13 @@ function TegnDraw(){
                 line(ball[ref].x,ball[ref].y,endX,endY)
                 triangle(endX,endY,endX-cos(ball[ref].dir+120)*width/40,endY-sin(ball[ref].dir+120)*width/40,endX-cos(ball[ref].dir-120)*width/40,endY-sin(ball[ref].dir-120)*width/40)
                 strokeWeight(width/200)
-            }   
+            }
             if(ball[(ref+1)%2].d>1){
                 endX=ball[(ref+1)%2].x+cos(ball[(ref+1)%2].dir)*width/8
                 endY=ball[(ref+1)%2].y+sin(ball[(ref+1)%2].dir)*width/8
                 line(ball[(ref+1)%2].x,ball[(ref+1)%2].y,endX,endY)
                 triangle(endX,endY,endX-cos(ball[(ref+1)%2].dir+120)*width/40,endY-sin(ball[(ref+1)%2].dir+120)*width/40,endX-cos(ball[(ref+1)%2].dir-120)*width/40,endY-sin(ball[(ref+1)%2].dir-120)*width/40)
-            }  
+            } 
         }
     }
 }

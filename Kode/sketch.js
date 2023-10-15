@@ -15,8 +15,8 @@ function setup() {
     {form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}
   ]
   ball = [
-    {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
-    {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}
+    {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0,hat:0},
+    {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0,hat:0}
   ]
   skyd = false 
   ref=0
@@ -30,7 +30,12 @@ function Level(){
   for(let i =0; i<levelsKnapper.length;i++){
     levelsKnapper[i].hide()
   }
+
   tilbageKnap.hide()
+  if(hat[0]!=0){
+    ball[0].hat.show()
+    ball[1].hat.show()
+  }
   ball[0].x=width/4
   ball[0].y=15*height/16
   ball[0].d=1.5*width/40
@@ -53,10 +58,16 @@ function draw() {
       StartScreen()
       ref =0
     }
+
+
     ball[0].x+=cos(ball[0].dir)*ball[0].speed
     ball[1].x+=cos(ball[1].dir)*ball[1].speed
     ball[0].y+=sin(ball[0].dir)*ball[0].speed
     ball[1].y+=sin(ball[1].dir)*ball[1].speed
+    if(hat[0]!=0){
+      ball[0].hat.position(ball[0].x-ball[0].d/1.7,ball[0].y-ball[0].d)
+      ball[1].hat.position(ball[1].x-ball[1].d/1.7,ball[1].y-ball[1].d)
+    }
     if(skyd == false){
       ball[0].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
       ball[1].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
@@ -95,19 +106,3 @@ function draw() {
 
 
 
-
-
-function Grid(Antal=10) {
-  for (i = 0; i < Antal; i++) {
-    for (k = 0; k < Antal; k++) {
-      if ((k % 2 == 1) & (i % 2 == 1)) {
-        fill(60, 120, 60);
-      } else if ((k % 2 == 0) & (i % 2 == 0)) {
-        fill(60, 120, 60);
-      } else {
-        fill(0,255,0);
-      }
-      rect((width/Antal) * i, (height/Antal) * k, 50, 50);
-    }
-  }
-}
