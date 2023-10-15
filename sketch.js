@@ -21,7 +21,12 @@ function setup() {
     },
     //index 1
     {obs:[{form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}, {form:"rect",x:width/8,y:height/2,b:width/4,h:3*height/100,col:[139,69,19]}],
-    hul:[{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]}
+    hul:[{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]
+    },
+    //index 2
+    {obs:[{form: "line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4, col:[139,69,19]}],
+    hul:[{form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}]
+    }
   ]
   ball = [
     {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
@@ -142,18 +147,29 @@ function Tegn(liste){
     if(liste[i].form =="rect"){
       rect(liste[i].x,liste[i].y,liste[i].b,liste[i].h)
     }
+    if(liste[i].form =="line"){
+      strokeWeight(10)
+      stroke(liste[i].col)
+      line(liste[i].xcent+cos(liste[i].angle)*liste[i].length, liste[i].ycent+sin(liste[i].angle)*liste[i].length, liste[i].xcent-cos(liste[i].angle)*liste[i].length, liste[i].ycent-sin(liste[i].angle)*liste[i].length)
+      stroke(100)
+      strokeWeight(1)
+    }
   }
 }
 
 function Kollison(Spiller,bane,Hul){
   for(let i = 0;i<Spiller.length;i++){
+    //bounce on horizontal edges
     if(Spiller[i].x-Spiller[i].d/2<0||Spiller[i].x+Spiller[i].d/2>width){
       Spiller[i].dir =90*(PI/2)-Spiller[i].dir
     }
+    //bounce on vertical edges
     if(Spiller[i].y-Spiller[i].d/2<0||Spiller[i].y+Spiller[i].d/2>height){
       ball[i].dir =Spiller[i].dir*(-1)
     }
+
     for(let j = 0;j<bane.length;j++){
+      //bounce on rectangular obstacles
       if(bane[j].form=="rect"){
         if (Spiller[i].x + Spiller[i].d/2 + cos(Spiller[i].dir)*Spiller[i].speed > bane[j].x && 
             Spiller[i].x + cos(Spiller[i].dir)*Spiller[i].speed  < bane[j].x + bane[j].b && 
@@ -168,17 +184,26 @@ function Kollison(Spiller,bane,Hul){
           Spiller[i].dir =Spiller[i].dir*(-1)
        }
       }
-      if(bane[j].form=="cir"){
-        
+      //bounce on line
+      if(bane[j].form=="line"){
+        xproj = Spiller[i].x - cos(bane[j].angle+PI/2)*(cos(bane[j].angle+PI/2)*(Spiller[i].x-bane[j].xcent) + sin(bane[j].angle+PI/2)*(Spiller[i].y-bane[j].ycent))
+        yproj = Spiller[i].y - sin(bane[j].angle+PI/2)*(cos(bane[j].angle+PI/2)*(Spiller[i].x-bane[j].xcent) + sin(bane[j].angle+PI/2)*(Spiller[i].y-bane[j].ycent))
+        if(sqrt((xproj-Spiller[i].x)**2 + (yproj-Spiller[i].y)**2) <Spiller[i].d/2){
+          if(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2) <bane[j].length){
+            Spiller[i].dir=2*bane[j].angle - Spiller[i].dir
+          }
+        }
       }
+
     }
-    for(let j = 0;j<Hul.length;j++){
-      if(Hul[j].d/2+Spiller[i].d/2>sqrt((Spiller[i].x-Hul[j].x)**2+(Spiller[i].y-Hul[j].y)**2)){
-        Spiller[i].d=0
-        ref=(i+1)%2
-        Spiller[ref].col=[255,250,0]
-      }
+    
+    //skyd i hul
+    if(Hul[i].d/2+Spiller[i].d/2>sqrt((Spiller[i].x-Hul[i].x)**2+(Spiller[i].y-Hul[i].y)**2)){
+      Spiller[i].d=0
+      ref=(i+1)%2
+      Spiller[ref].col=[255,250,0]
     }
+    
   } 
 }
 
