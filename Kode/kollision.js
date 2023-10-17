@@ -21,6 +21,7 @@ function Kollison(Spiller,bane,Hul){
             Spiller[i].dir =Spiller[i].dir*(-1)
          }
         }
+        //får fart på, når den rammer imod omløbsretningen på kanten
         if(bane[j].form=="line"){
           xproj = Spiller[i].x - cos(bane[j].angle+PI/2)*(cos(bane[j].angle+PI/2)*(Spiller[i].x-bane[j].xcent) + sin(bane[j].angle+PI/2)*(Spiller[i].y-bane[j].ycent))
           yproj = Spiller[i].y - sin(bane[j].angle+PI/2)*(cos(bane[j].angle+PI/2)*(Spiller[i].x-bane[j].xcent) + sin(bane[j].angle+PI/2)*(Spiller[i].y-bane[j].ycent))
@@ -38,15 +39,30 @@ function Kollison(Spiller,bane,Hul){
             if(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2) <bane[j].length+Spiller[i].d/2+bane[j].t/2){
                 if(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2) >bane[j].length){
                   if(sqrt((Spiller[i].x-x1)**2 + (Spiller[i].y-y1)**2)<Spiller[i].d/2+bane[j].t/2 ||sqrt((Spiller[i].x-x2)**2 + (Spiller[i].y-y2)**2)< Spiller[i].d/2+bane[j].t/2){
-                  console.log("dav")
-                  inangle=PI/2+ang
-                  Spiller[i].dir=2*inangle - Spiller[i].dir
+                    console.log("dav")
+                    inangle=PI/2+ang
+                    Spiller[i].dir=2*inangle-Spiller[i].dir
+                    
+                    xvel=cos(inangle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+cos(Spiller[i].dir)*Spiller[i].speed
+                    yvel=sin(inangle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+sin(Spiller[i].dir)*Spiller[i].speed
+                    Spiller[i].speed=sqrt(xvel**2+yvel**2)
+                    Spiller[i].dir=atan2(yvel,xvel)
                   }
                 }else{
                   Spiller[i].dir=2*bane[j].angle - Spiller[i].dir
+                  if(sqrt((xproj-x1)**2 + (yproj-y1)**2)<sqrt((xproj-x2)**2 + (yproj-y2)**2)){
+                  xvel=cos(bane[j].angle +PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+cos(Spiller[i].dir)*Spiller[i].speed
+                  yvel=sin(bane[j].angle +PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+sin(Spiller[i].dir)*Spiller[i].speed
+                  }else{
+                    xvel=cos(bane[j].angle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel+cos(Spiller[i].dir)*Spiller[i].speed
+                    yvel=sin(bane[j].angle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel+sin(Spiller[i].dir)*Spiller[i].speed
+                  }
+                  Spiller[i].speed=sqrt(xvel**2+yvel**2)
+                  Spiller[i].dir=atan2(yvel,xvel)
                 }
-                Spiller[i].x+=cos(Spiller[i].dir)
-                Spiller[i].y+=sin(Spiller[i].dir)
+                Spiller[i].x+=cos(Spiller[i].dir)*Spiller[i].speed
+                Spiller[i].y+=sin(Spiller[i].dir)*Spiller[i].speed
+                
               }
             }
           }

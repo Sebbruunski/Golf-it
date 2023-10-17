@@ -28,7 +28,7 @@ function setup() {
     },
     //index 2
     {obs:[
-      {form: "line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4,t:50, col:[139,69,19]}],
+      {form: "line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4,t:50,angvel:PI/128, col:[139,69,19]}],
     hul:[
       {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
     ball:[
@@ -98,14 +98,20 @@ function draw() {
         }
       }
     }
-    if(ball[1].speed>width/4000 &ball[0].speed>width/4000){
-      ball[1].speed -=width/40000
-      ball[0].speed -=width/40000
-    }
-    else{ 
-      ball[1].speed =0
+    if(ball[0].speed>width/4000 & ball[0].d>1){
+      ball[0].speed -=width/4000
+      skyd=true
+    }else{ 
       ball[0].speed =0
-      skyd =false
+    }
+    if(ball[1].speed>width/4000 & ball[1].d>1){
+      ball[1].speed -=width/4000
+      skyd=true
+    }else{ 
+      ball[1].speed =0
+    }
+    if(ball[0].speed ==0 & ball[1].speed ==0){
+      skyd=false
     }
   }
   strokeWeight(1)
