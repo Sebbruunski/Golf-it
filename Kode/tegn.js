@@ -19,17 +19,45 @@ function TegnDraw(){
             stroke(255,250,0)
             fill(255,250,0)
             if(ball[ref].d>1){
-                endX=ball[ref].x+cos(ball[ref].dir)*width/8
-                endY=ball[ref].y+sin(ball[ref].dir)*width/8
-                line(ball[ref].x,ball[ref].y,endX,endY)
-                triangle(endX,endY,endX-cos(ball[ref].dir+120)*width/40,endY-sin(ball[ref].dir+120)*width/40,endX-cos(ball[ref].dir-120)*width/40,endY-sin(ball[ref].dir-120)*width/40)
-                strokeWeight(width/200)
+
+                endX=ball[ref].x+cos(ball[ref].dir)*sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)
+                endY=ball[ref].y+sin(ball[ref].dir)*sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)
+                if(sqrt((endX-ball[ref].x)**2+(endY-ball[ref].y)**2)<100)
+                {
+                    line(ball[ref].x,ball[ref].y,endX,endY)
+                    triangle(endX,endY,endX-cos(ball[ref].dir+120)*width/40,endY-sin(ball[ref].dir+120)*width/40,endX-cos(ball[ref].dir-120)*width/40,endY-sin(ball[ref].dir-120)*width/40)
+                    strokeWeight(width/200)
+                }
+                else
+                {
+                    endX=ball[ref].x+cos(ball[ref].dir)*100
+                    endY=ball[ref].y+sin(ball[ref].dir)*100
+                    line(ball[ref].x,ball[ref].y,endX,endY)
+                    triangle(endX,endY,endX-cos(ball[ref].dir+120)*width/40,endY-sin(ball[ref].dir+120)*width/40,endX-cos(ball[ref].dir-120)*width/40,endY-sin(ball[ref].dir-120)*width/40)
+                    strokeWeight(width/200)
+                }
+
             }
             if(ball[(ref+1)%2].d>1){
-                endX=ball[(ref+1)%2].x+cos(ball[(ref+1)%2].dir)*width/8
-                endY=ball[(ref+1)%2].y+sin(ball[(ref+1)%2].dir)*width/8
-                line(ball[(ref+1)%2].x,ball[(ref+1)%2].y,endX,endY)
-                triangle(endX,endY,endX-cos(ball[(ref+1)%2].dir+120)*width/40,endY-sin(ball[(ref+1)%2].dir+120)*width/40,endX-cos(ball[(ref+1)%2].dir-120)*width/40,endY-sin(ball[(ref+1)%2].dir-120)*width/40)
+                endX=ball[(ref+1)%2].x+cos(ball[(ref+1)%2].dir)*sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)
+                endY=ball[(ref+1)%2].y+sin(ball[(ref+1)%2].dir)*sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)
+                if(sqrt((endX-ball[(ref+1)%2].x)**2+(endY-ball[(ref+1)%2].y)**2)<100)
+                {
+                    line(ball[(ref+1)%2].x,ball[(ref+1)%2].y,endX,endY)
+                    triangle(endX,endY,endX-cos(ball[(ref+1)%2].dir+120)*width/40,endY-sin(ball[(ref+1)%2].dir+120)*width/40,endX-cos(ball[(ref+1)%2].dir-120)*width/40,endY-sin(ball[(ref+1)%2].dir-120)*width/40)
+                    strokeWeight(width/200)
+                }
+                else
+                {
+                    endX=ball[(ref+1)%2].x+cos(ball[(ref+1)%2].dir)*100
+                    endY=ball[(ref+1)%2].y+sin(ball[(ref+1)%2].dir)*100
+                    line(ball[(ref+1)%2].x,ball[(ref+1)%2].y,endX,endY)
+                    triangle(endX,endY,endX-cos(ball[(ref+1)%2].dir+120)*width/40,endY-sin(ball[(ref+1)%2].dir+120)*width/40,endX-cos(ball[(ref+1)%2].dir-120)*width/40,endY-sin(ball[(ref+1)%2].dir-120)*width/40)
+                    strokeWeight(width/200)
+                }
+                
+                
+
             } 
         }
     }
