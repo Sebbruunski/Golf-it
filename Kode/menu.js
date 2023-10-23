@@ -27,12 +27,14 @@ function SettingShow(){
 
 
 function MellemLevels(){
-  tilbageKnap.position(width/2-tilbageKnap.width+10,height/2)
+  tilbageKnap.position(width/2-tilbageKnap.width-10,height/2)
   tilbageKnap.show()
   nesteLevel.show()
 }
 
 function StartScreen(){
+    tilbageKnap.position(0,7*height/8)
+    nesteLevel.hide()
     tilbageKnap.hide()
     spilKnap.show()
     settingKnap.show()
@@ -81,7 +83,9 @@ function ShopSetup(billedeListe){
 }
 
 function NextLevel(){
-  levelNummer += 1
+  if(levelNummer<bane.length-1){
+    levelNummer += 1
+  }
   tilbageKnap.hide()
   nesteLevel.hide()
   if(hat[0]!=0){
@@ -135,7 +139,7 @@ function MenuSetup(){
   shopKnap.position((width-shopKnap.width)/2,height/3+1.5*settingKnap.height)
   spilKnap.position((width-spilKnap.width)/2,height/3)
   settingKnap.position((width-settingKnap.width)/2,height/3+3*settingKnap.height)
-  nesteLevel.position(width/2,height/2)
+  nesteLevel.position(width/2+10,height/2)
   spilKnap.mousePressed(levelsShow)
   shopKnap.mousePressed(ShopShow)
   tilbageKnap.mousePressed(StartScreen)
