@@ -35,6 +35,16 @@ function setup() {
     ball:[
       {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
       {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
+    },
+    //bane index 3 
+    {obs:[
+      {form:"line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4,t:50,angvel:0, col:[139,69,19]},
+      {form:"rect",x:200,y:200,b:100,h:100,col:[30,144,255]}],
+    hul:[
+      {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
+    ball:[
+      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     }
   ]
   ball = [
