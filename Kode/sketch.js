@@ -32,8 +32,8 @@ function setup() {
     hul:[
       {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
     ball:[
-      {form:"cir",x:width/4+(random(width/8)-width/16),y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
-      {form:"cir",x:3*width/4+(random(width/8)-width/16),y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
+      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     }
   ]
   ball=[
@@ -115,7 +115,6 @@ function draw() {
     }
   }
   strokeWeight(1)
-  
   Kollison(ball,bane[levelNummer].obs,bane[levelNummer].hul)
   TegnDraw()
 }
