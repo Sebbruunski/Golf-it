@@ -104,11 +104,10 @@ function draw() {
           ball[0].col=[255]
         }else if(ball[1].col.length>2||ball[0].col.length>2){
         skyd = true
-        console.log(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)/25)
         
-        if(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)/25>250){
-          ball[1].speed =4
-          ball[0].speed =4
+        if(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)>width/3){
+          ball[1].speed =width/75
+          ball[0].speed =width/75
         }
         else{
           ball[1].speed =(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)/25)
@@ -118,13 +117,13 @@ function draw() {
       }
     }
     if(ball[0].speed>width/4000 & ball[0].d>1){
-      ball[0].speed -=width/30000
+      ball[0].speed -=width/20000
       skyd=true
     }else{ 
       ball[0].speed =0
     }
     if(ball[1].speed>width/4000 & ball[1].d>1){
-      ball[1].speed -=width/30000
+      ball[1].speed -=width/20000
       skyd=true
     }else{ 
       ball[1].speed =0

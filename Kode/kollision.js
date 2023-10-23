@@ -2,9 +2,13 @@ function Kollison(Spiller,bane,Hul){
     for(let i = 0;i<Spiller.length;i++){
       if(Spiller[i].x-Spiller[i].d/2<0||Spiller[i].x+Spiller[i].d/2>width){
         Spiller[i].dir =90*(PI/2)-Spiller[i].dir
+        Spiller[i].x+=cos(Spiller[i].dir)*Spiller[i].speed
+        Spiller[i].y+=sin(Spiller[i].dir)*Spiller[i].speed
       }
       if(Spiller[i].y-Spiller[i].d/2<0||Spiller[i].y+Spiller[i].d/2>height){
-        ball[i].dir =Spiller[i].dir*(-1)
+        Spiller[i].dir =Spiller[i].dir*(-1)
+        Spiller[i].x+=cos(Spiller[i].dir)*Spiller[i].speed
+        Spiller[i].y+=sin(Spiller[i].dir)*Spiller[i].speed
       }
       for(let j = 0;j<bane.length;j++){
         if(bane[j].form=="rect"){
@@ -21,7 +25,6 @@ function Kollison(Spiller,bane,Hul){
             Spiller[i].dir =Spiller[i].dir*(-1)
          }
         }
-        //får fart på, når den rammer imod omløbsretningen på kanten
         if(bane[j].form=="line"){
           xproj = Spiller[i].x - cos(bane[j].angle+PI/2)*(cos(bane[j].angle+PI/2)*(Spiller[i].x-bane[j].xcent) + sin(bane[j].angle+PI/2)*(Spiller[i].y-bane[j].ycent))
           yproj = Spiller[i].y - sin(bane[j].angle+PI/2)*(cos(bane[j].angle+PI/2)*(Spiller[i].x-bane[j].xcent) + sin(bane[j].angle+PI/2)*(Spiller[i].y-bane[j].ycent))
@@ -48,8 +51,8 @@ function Kollison(Spiller,bane,Hul){
                       xvel=cos(inangle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+cos(Spiller[i].dir)*Spiller[i].speed
                       yvel=sin(inangle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+sin(Spiller[i].dir)*Spiller[i].speed
                     }else{
-                      xvel=cos(bane[j].angle +PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+cos(Spiller[i].dir)*Spiller[i].speed
-                      yvel=sin(bane[j].angle +PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+sin(Spiller[i].dir)*Spiller[i].speed
+                      xvel=cos(bane[j].angle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+cos(Spiller[i].dir)*Spiller[i].speed
+                      yvel=sin(bane[j].angle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+sin(Spiller[i].dir)*Spiller[i].speed
                     }
                     Spiller[i].speed=sqrt(xvel**2+yvel**2)
                     Spiller[i].dir=atan2(yvel,xvel)
