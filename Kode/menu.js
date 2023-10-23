@@ -7,6 +7,7 @@ let spilKnap;
 let shopKnap;
 let settingKnap;
 let tilbageKnap;
+let nesteLevel;
 
 function LevelsKnapper(){
     for(let i =0; i<bane.length;i++){
@@ -23,7 +24,13 @@ function SettingShow(){
     settingKnap.hide()
     shopKnap.hide()
 }
-  
+
+
+function MellemLevels(){
+  tilbageKnap.position(width/2-tilbageKnap.width+10,height/2)
+  tilbageKnap.show()
+  nesteLevel.show()
+}
 
 function StartScreen(){
     tilbageKnap.hide()
@@ -73,6 +80,27 @@ function ShopSetup(billedeListe){
   }
 }
 
+function NextLevel(){
+  levelNummer += 1
+  tilbageKnap.hide()
+  nesteLevel.hide()
+  if(hat[0]!=0){
+    ball[0].hat.show()
+    ball[1].hat.show()
+  }
+  ball[0].x=bane[levelNummer].ball[0].x
+  ball[0].y=bane[levelNummer].ball[0].y
+  ball[0].d=bane[levelNummer].ball[0].d
+  ball[1].x=bane[levelNummer].ball[1].x
+  ball[1].y=bane[levelNummer].ball[1].y
+  ball[1].d=bane[levelNummer].ball[1].d
+  ball[0].col= [255]
+  ball[1].col= [255]
+  ball[0].speed=0
+  ball[1].speed=0
+  state = "play"
+}
+
 function TjekBoks(){
   let a = hat
   for(let i =0;i<chekBokse.length;i++){
@@ -95,7 +123,10 @@ function TjekBoks(){
   }
 }
 
+
+
 function MenuSetup(){
+  nesteLevel =createButton("Næste level")
   tilbageKnap = createButton("Tilbage")
   shopKnap = createButton("Shop")
   spilKnap = createButton("Spil")
@@ -104,11 +135,14 @@ function MenuSetup(){
   shopKnap.position((width-shopKnap.width)/2,height/3+1.5*settingKnap.height)
   spilKnap.position((width-spilKnap.width)/2,height/3)
   settingKnap.position((width-settingKnap.width)/2,height/3+3*settingKnap.height)
+  nesteLevel.position(width/2,height/2)
   spilKnap.mousePressed(levelsShow)
   shopKnap.mousePressed(ShopShow)
   tilbageKnap.mousePressed(StartScreen)
   settingKnap.mousePressed(SettingShow)
+  nesteLevel.mousePressed(NextLevel)
   tilbageKnap.hide()
+  nesteLevel.hide()
   shopTing = []
   ShopSetup(
     ["billeder/CowboyHat.webp","billeder/Cap.png","billeder/TopHat.webp","billeder/ChefHat.webp",

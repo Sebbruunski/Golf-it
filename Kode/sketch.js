@@ -78,7 +78,7 @@ function draw() {
     if(ball[0].d<1&&ball[1].d<1){
       state = "startScreen"
       skyd = false
-      StartScreen()
+      MellemLevels()
       ref =0
     }
 
