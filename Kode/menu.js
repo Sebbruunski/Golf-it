@@ -110,7 +110,9 @@ function MenuSetup(){
   settingKnap.mousePressed(SettingShow)
   tilbageKnap.hide()
   shopTing = []
-  ShopSetup(["billeder/CowboyHat.webp","billeder/Cap.png"])
+  ShopSetup(
+    ["billeder/CowboyHat.webp","billeder/Cap.png","billeder/TopHat.webp","billeder/ChefHat.webp",
+    "billeder/FlotHat.png","billeder/skibber.png","billeder/GreenHat.png","billeder/TrylleHat.webp"])
   LevelsKnapper()
 }
 

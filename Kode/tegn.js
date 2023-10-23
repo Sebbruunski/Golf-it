@@ -55,9 +55,6 @@ function TegnDraw(){
                     triangle(endX,endY,endX-cos(ball[(ref+1)%2].dir+120)*width/40,endY-sin(ball[(ref+1)%2].dir+120)*width/40,endX-cos(ball[(ref+1)%2].dir-120)*width/40,endY-sin(ball[(ref+1)%2].dir-120)*width/40)
                     strokeWeight(width/200)
                 }
-                
-                
-
             } 
         }
     }

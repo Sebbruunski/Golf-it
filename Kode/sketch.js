@@ -8,16 +8,17 @@ let levelNummer = 0;
 function setup() {
   createCanvas(600, 600);
   bane = [
-    //index 0
+    //bane index 0
     {obs: [
       {form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}],
     hul: [
-      {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
+      {form:"cir",x:(width-1.5*width/100)/4,y:height/8,d:width/16,col:[0]},
+      {form:"cir",x:3*(width-1.5*width/100)/4,y:width/8,d:width/16,col:[0]}],
     ball:[
-      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
-      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
+      {form:"cir",x:(width-1.5*width/100)/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:3*(width-1.5*width/100)/4+1.5*width/100,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     },
-    //index 1
+    //bane index 1
     {obs:[{
       form:"rect",x:(width/2)-1.5*width/100,y:0,b:3*width/100,h:height,col:[139,69,19]}, {form:"rect",x:width/8,y:height/2,b:width/4,h:3*height/100,col:[139,69,19]}],
     hul:[
@@ -26,14 +27,14 @@ function setup() {
       {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
       {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     },
-    //index 2
+    //bane index 2
     {obs:[
       {form: "line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4,t:50, col:[139,69,19]}],
     hul:[
       {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
     ball:[
-      {form:"cir",x:width/4+(random(width/8)-width/16),y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
-      {form:"cir",x:3*width/4+(random(width/8)-width/16),y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
+      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     }
   ]
   ball = [
@@ -104,16 +105,15 @@ function draw() {
           ball[0].col=[255]
         }else if(ball[1].col.length>2||ball[0].col.length>2){
         skyd = true
-        console.log(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)/25)
-        
-        if(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)/25>250){
-          ball[1].speed =4
-          ball[0].speed =4
-        }
-        else{
-          ball[1].speed =(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)/25)
-          ball[0].speed =(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)/25)
-        }
+
+         if(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)/25>8){
+            ball[1].speed =8
+            ball[0].speed =8
+          }
+          else{
+            ball[1].speed =(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)/25)*2
+            ball[0].speed =(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)/25)*2
+          }
         }
       }
     }
