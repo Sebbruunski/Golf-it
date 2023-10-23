@@ -84,6 +84,7 @@ function Tegn(liste){
             rect(liste[i].x,liste[i].y,liste[i].b,liste[i].h)
         }
         if(liste[i].form =="line"){
+            liste[i].angle+=liste[i].angvel
             strokeWeight(liste[i].t)
             stroke(liste[i].col)
             line(liste[i].xcent+cos(liste[i].angle)*liste[i].length, liste[i].ycent+sin(liste[i].angle)*liste[i].length, liste[i].xcent-cos(liste[i].angle)*liste[i].length, liste[i].ycent-sin(liste[i].angle)*liste[i].length)
