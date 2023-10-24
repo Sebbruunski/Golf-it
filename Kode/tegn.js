@@ -62,6 +62,7 @@ function TegnDraw(){
 
 function Tegn(liste){
     for (let i = 0; i<liste.length;i++) {
+        stroke(40)
         if (liste[i].col.length<2)
         {
             fill(liste[i].col[0])
@@ -78,6 +79,9 @@ function Tegn(liste){
             strokeWeight(1)
         }
         if(liste[i].form =="rect"){
+            if(liste[i].col[0]==30){
+                noStroke()
+            }
             rect(liste[i].x,liste[i].y,liste[i].b,liste[i].h)
         }
         if(liste[i].form =="line"){

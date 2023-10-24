@@ -18,14 +18,13 @@ function Kollison(Spiller,Bane,Hul){
             Spiller[i].y < Bane[j].y + Bane[j].h) 
             {
             //hvis det er en brun forhindring
-            if(Spiller[j].col[0]==139){
+            if(Bane[j].col[0]==139){
              Spiller[i].dir =90*(PI/2)-Spiller[i].dir
             }
             if(Bane[j].col[0]==30){
-              Spiller[i].x=bane.ball[i].x
-              Spiller[i].y=bane.ball[i].y
-              Spiller[i].d=bane.ball[i].d
-
+              Spiller[i].x=bane[levelNummer].ball[i].x
+              Spiller[i].y=bane[levelNummer].ball[i].y
+              Spiller[i].d=bane[levelNummer].ball[i].d
               Spiller[i].speed=0
             }
           }
@@ -35,18 +34,17 @@ function Kollison(Spiller,Bane,Hul){
             Spiller[i].y + sin(Spiller[i].dir)*Spiller[i].speed < Bane[j].y + Bane[j].h) 
           {
             //hvis det er en brun forhindring
-            if(Spiller[j].col[0]==139){
+            if(Bane[j].col[0]==139){
               Spiller[i].dir =Spiller[i].dir*(-1)
             }
+            //hvis faven er blå er det vand
             if(Bane[j].col[0]==30){
               Spiller[i].x=bane[levelNummer].ball[i].x
               Spiller[i].y=bane[levelNummer].ball[i].y
               Spiller[i].d=bane[levelNummer].ball[i].d
-              Spiller[i].col= [255]
               Spiller[i].speed=0
             }
           }
-          //hvis faven er blå er det vand
 
         }
         if(Bane[j].form=="line"){

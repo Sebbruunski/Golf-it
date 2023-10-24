@@ -38,8 +38,10 @@ function setup() {
     },
     //bane index 3 
     {obs:[
-      {form:"line",xcent:width/2,ycent:height/2,length:width/6,angle:PI/4,t:50,angvel:0, col:[139,69,19]},
-      {form:"rect",x:200,y:200,b:100,h:100,col:[30,144,255]}],
+      {form:"line",xcent:width/2,ycent:height/2,length:width/4,angle:PI/4,t:50,angvel:PI/40, col:[139,69,19]},
+      {form:"rect",x:0,y:height/8,b:width/5,h:6*height/8,col:[30,144,255]},
+      {form:"rect",x:4*width/5,y:height/8,b:width/5,h:6*height/8,col:[30,144,255]}
+    ],
     hul:[
       {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
     ball:[
