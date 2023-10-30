@@ -61,15 +61,15 @@ function Kollison(Spiller,Bane,Hul){
           } else {
             ang=atan2(Spiller[i].y-y2,Spiller[i].x-x2)
           }
-          if(sqrt((xproj-Spiller[i].x)**2 + (yproj-Spiller[i].y)**2) <Spiller[i].d/2+bane[j].t/2){
-            if(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2) <bane[j].length+Spiller[i].d/2+bane[j].t/2){
-              if(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2) >bane[j].length){
-                  if(sqrt((Spiller[i].x-x1)**2 + (Spiller[i].y-y1)**2)<Spiller[i].d/2+bane[j].t/2 ||sqrt((Spiller[i].x-x2)**2 + (Spiller[i].y-y2)**2)< Spiller[i].d/2+bane[j].t/2){
+          if(sqrt((xproj-Spiller[i].x)**2 + (yproj-Spiller[i].y)**2) <Spiller[i].d/2+Bane[j].t/2){
+            if(sqrt((xproj-Bane[j].xcent)**2 + (yproj-Bane[j].ycent)**2) <Bane[j].length+Spiller[i].d/2+Bane[j].t/2){
+              if(sqrt((xproj-Bane[j].xcent)**2 + (yproj-Bane[j].ycent)**2) >Bane[j].length){
+                  if(sqrt((Spiller[i].x-x1)**2 + (Spiller[i].y-y1)**2)<Spiller[i].d/2+Bane[j].t/2 ||sqrt((Spiller[i].x-x2)**2 + (Spiller[i].y-y2)**2)< Spiller[i].d/2+Bane[j].t/2){
                     //kører, når du kolliderer med kanten (den runde)
                     inangle=PI/2+ang
                     Spiller[i].dir=2*inangle-Spiller[i].dir
-                    xvel=cos(inangle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+cos(Spiller[i].dir)*Spiller[i].speed
-                    yvel=sin(inangle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+sin(Spiller[i].dir)*Spiller[i].speed
+                    xvel=cos(inangle -PI/2)*(sqrt((xproj-Bane[j].xcent)**2 + (yproj-Bane[j].ycent)**2))*Bane[j].angvel*1.1+cos(Spiller[i].dir)*Spiller[i].speed
+                    yvel=sin(inangle -PI/2)*(sqrt((xproj-Bane[j].xcent)**2 + (yproj-Bane[j].ycent)**2))*Bane[j].angvel*1.1+sin(Spiller[i].dir)*Spiller[i].speed
                     Spiller[i].speed=sqrt(xvel**2+yvel**2)
                     Spiller[i].dir=atan2(yvel,xvel)
                   }
