@@ -24,9 +24,12 @@ function LevelsKnapper(){
 
 function Buy(){
   knap = floor((mouseX-levelsKnapper[0].width)*(5/width))+floor(mouseY*(5/height))*4-4
-  chekBokse[knap][0] = true
-  chekBokse[knap][1].show()
-  buyKnapper[knap].hide()
+  if(coins>=3){
+    coins-=3
+    chekBokse[knap][0] = true
+    chekBokse[knap][1].show()
+    buyKnapper[knap].hide()
+  }
 }
 
 function SettingShow(){

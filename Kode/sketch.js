@@ -7,7 +7,7 @@ bane = []
 let levelNummer = 0;
 let cnv;
 function setup() {
-  cnv = createCanvas(500, 500);
+  cnv = createCanvas(450, 450);
   screenHeight = windowHeight/2-canvas.height/4
   screenWidth = windowWidth/2-canvas.width/4
   cnv.position(windowWidth/2-canvas.width/4,screenHeight)
@@ -49,6 +49,20 @@ function setup() {
     ],
     hul:[
       {form:"cir",x:width/4,y:width/8,d:width/16,col:[0]},{form:"cir",x:3*width/4,y:width/8,d:width/16,col:[0]}],
+    ball:[
+      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
+    },
+    //bane index 4
+    {obs:[
+      {form:"rect",x:0,y:0,b:width/10,h:height,col:[30,144,255]},
+      {form:"rect",x:9*width/10,y:0,b:width/10,h:height,col:[30,144,255]},
+      {form:"line",xcent:width/5,ycent:height/2,length:width/8,angle:PI,t:15,angvel:PI/120, col:[139,69,19]},
+      {form:"line",xcent:4*width/5,ycent:height/2,length:width/8,angle:PI,t:15,angvel:-PI/120, col:[139,69,19]},
+      {form:"line",xcent:width/2,ycent:height/5,length:width/5,angle:PI,t:20,angvel:0, col:[139,69,19]}
+    ],
+    hul:[
+      {form:"cir",x:4*width/5,y:width/8,d:width/16,col:[0]},{form:"cir",x:width/5,y:width/8,d:width/16,col:[0]}],
     ball:[
       {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
       {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
@@ -94,13 +108,12 @@ function Level(){
 function draw() {
   if (state == "play"){
     if(ball[0].d<1&&ball[1].d<1){
+      coins+=3
       state = "startScreen"
       skyd = false
       MellemLevels()
       ref =0
     }
-
-
     ball[0].x+=cos(ball[0].dir)*ball[0].speed
     ball[1].x+=cos(ball[1].dir)*ball[1].speed
     ball[0].y+=sin(ball[0].dir)*ball[0].speed
@@ -155,6 +168,7 @@ function draw() {
   Kollison(ball,bane[levelNummer].obs,bane[levelNummer].hul)
   TegnDraw()
   fill(255,255,0)
+  stroke(10)
   textSize(25)
   text(coins,width-20*(floor(coins/10)+1),20)
 }
