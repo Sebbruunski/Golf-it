@@ -1,12 +1,17 @@
 state = "startScreen"
+let coins = 0;
 pindMidt = 8
 hul = []
 ball = []
 bane = []
 let levelNummer = 0;
-
+let cnv;
 function setup() {
-  createCanvas(600, 600);
+  cnv = createCanvas(500, 500);
+  screenHeight = windowHeight/2-canvas.height/4
+  screenWidth = windowWidth/2-canvas.width/4
+  cnv.position(windowWidth/2-canvas.width/4,screenHeight)
+  
   bane = [
     //bane index 0
     {obs: [
@@ -38,7 +43,7 @@ function setup() {
     },
     //bane index 3 
     {obs:[
-      {form:"line",xcent:width/2,ycent:height/2,length:width/4,angle:PI/4,t:50,angvel:PI/40, col:[139,69,19]},
+      {form:"line",xcent:width/2,ycent:height/2,length:width/4,angle:PI/4,t:50,angvel:PI/120, col:[139,69,19]},
       {form:"rect",x:0,y:height/8,b:width/5,h:6*height/8,col:[30,144,255]},
       {form:"rect",x:4*width/5,y:height/8,b:width/5,h:6*height/8,col:[30,144,255]}
     ],
@@ -71,6 +76,7 @@ function Level(){
     ball[0].hat.show()
     ball[1].hat.show()
   }
+  console.log(levelNummer)
   ball[0].x=bane[levelNummer].ball[0].x
   ball[0].y=bane[levelNummer].ball[0].y
   ball[0].d=bane[levelNummer].ball[0].d
@@ -100,8 +106,8 @@ function draw() {
     ball[0].y+=sin(ball[0].dir)*ball[0].speed
     ball[1].y+=sin(ball[1].dir)*ball[1].speed
     if(hat[0]!=0){
-      ball[0].hat.position(ball[0].x-ball[0].d/1.7,ball[0].y-ball[0].d)
-      ball[1].hat.position(ball[1].x-ball[1].d/1.7,ball[1].y-ball[1].d)
+      ball[0].hat.position(ball[0].x-ball[0].d/1.7+screenWidth,ball[0].y-ball[0].d+screenHeight)
+      ball[1].hat.position(ball[1].x-ball[1].d/1.7+screenWidth,ball[1].y-ball[1].d+screenHeight)
     }
     if(skyd == false){
       ball[0].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
@@ -148,6 +154,9 @@ function draw() {
   strokeWeight(1)
   Kollison(ball,bane[levelNummer].obs,bane[levelNummer].hul)
   TegnDraw()
+  fill(255,255,0)
+  textSize(25)
+  text(coins,width-20*(floor(coins/10)+1),20)
 }
 
 

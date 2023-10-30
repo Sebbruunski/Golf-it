@@ -89,7 +89,7 @@ function Tegn(liste){
             strokeWeight(liste[i].t)
             stroke(liste[i].col)
             line(liste[i].xcent+cos(liste[i].angle)*liste[i].length, liste[i].ycent+sin(liste[i].angle)*liste[i].length, liste[i].xcent-cos(liste[i].angle)*liste[i].length, liste[i].ycent-sin(liste[i].angle)*liste[i].length)
-            stroke(100)
+            stroke(40)
             strokeWeight(1)
         }
     }

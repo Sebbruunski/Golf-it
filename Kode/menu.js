@@ -1,21 +1,32 @@
 //Indeholder alle de variable som indgår i menuen
 shopTing = []
 levelsKnapper = []
-chekBokse = []
+chekBokse = [] //Har et på index et en plads hvor man gemmer checkboksen
+buyKnapper = []
 let hat = [0,0];
 let spilKnap;
 let shopKnap;
 let settingKnap;
 let tilbageKnap;
 let nesteLevel;
-
+let screenWidth;
+let screenHeight;
 function LevelsKnapper(){
-    for(let i =0; i<bane.length;i++){
-      levelsKnapper.push(createButton(i+1))
-      levelsKnapper[i].position((i%4+1)*width/5-levelsKnapper[i].width/2,floor((i+4)/4)*height/5)
-      levelsKnapper[i].mousePressed(Level)
-      levelsKnapper[i].hide()
-    }
+  for(let i =0; i<bane.length;i++){
+    levelsKnapper.push(createButton(i+1))
+    levelsKnapper[i].position((i%4+1)*width/5-levelsKnapper[i].width/2+screenWidth,floor((i+4)/4)*height/5+screenHeight)
+    levelsKnapper[i].mousePressed(Level)
+    levelsKnapper[i].hide()
+  }
+}
+
+
+
+function Buy(){
+  knap = floor((mouseX-levelsKnapper[0].width)*(5/width))+floor(mouseY*(5/height))*4-4
+  chekBokse[knap][0] = true
+  chekBokse[knap][1].show()
+  buyKnapper[knap].hide()
 }
 
 function SettingShow(){
@@ -27,13 +38,13 @@ function SettingShow(){
 
 
 function MellemLevels(){
-  tilbageKnap.position(width/2-tilbageKnap.width-10,height/2)
+  tilbageKnap.position(width/2-tilbageKnap.width-10+screenWidth,height/2+screenHeight)
   tilbageKnap.show()
   nesteLevel.show()
 }
 
 function StartScreen(){
-    tilbageKnap.position(0,7*height/8)
+    tilbageKnap.position(0+screenWidth,7*height/8+screenHeight)
     nesteLevel.hide()
     tilbageKnap.hide()
     spilKnap.show()
@@ -45,13 +56,20 @@ function StartScreen(){
     for(let i =0; i<shopTing.length;i++){
       shopTing[i][1].hide()
       chekBokse[i][1].hide()
+      buyKnapper[i].hide()
     }
 }
   
 function ShopShow(){
     for(let i = 0;i<shopTing.length;i++){
       shopTing[i][1].show()
-      chekBokse[i][1].show()
+      if(chekBokse[i][0]){
+        chekBokse[i][1].show()
+      }
+      else
+      {
+        buyKnapper[i].show()
+      }
     }
     spilKnap.hide()
     shopKnap.hide()
@@ -73,12 +91,16 @@ function ShopSetup(billedeListe){
   for(let i = 0; i<billedeListe.length;i++){
     shopTing.push([billedeListe[i],createImg(billedeListe[i],"")])
     shopTing[i][1].size(width/8,height/8) 
-    shopTing[i][1].position((i%4+1)*width/5-shopTing[i][1].width/2,floor((i+4)/4)*height/5)
+    shopTing[i][1].position((i%4+1)*width/5-shopTing[i][1].width/2+screenWidth,floor((i+4)/4)*height/5+screenHeight)
     shopTing[i][1].hide()
     chekBokse.push([false,createCheckbox("Valgt",false)])
-    chekBokse[i][1].position((i%4+1)*width/5-30,floor((i+4)/4)*height/5+height/10)
+    chekBokse[i][1].position((i%4+1)*width/5-30+screenWidth,floor((i+4)/4)*height/5+height/10+screenHeight)
     chekBokse[i][1].changed(TjekBoks)
     chekBokse[i][1].hide()
+    buyKnapper.push(createButton(3))
+    buyKnapper[i].position((i%4+1)*width/5-buyKnapper[i].width/2+screenWidth,floor((i+4)/4)*height/5+screenHeight)
+    buyKnapper[i].mousePressed(Buy)
+    buyKnapper[i].hide()
   }
 }
 
@@ -135,11 +157,11 @@ function MenuSetup(){
   shopKnap = createButton("Shop")
   spilKnap = createButton("Spil")
   settingKnap = createButton("Indstilling")
-  tilbageKnap.position(0,7*height/8)
-  shopKnap.position((width-shopKnap.width)/2,height/3+1.5*settingKnap.height)
-  spilKnap.position((width-spilKnap.width)/2,height/3)
-  settingKnap.position((width-settingKnap.width)/2,height/3+3*settingKnap.height)
-  nesteLevel.position(width/2+10,height/2)
+  tilbageKnap.position(0+screenWidth,7*height/8+screenHeight)
+  shopKnap.position((width-shopKnap.width)/2+screenWidth,height/3+1.5*settingKnap.height+screenHeight)
+  spilKnap.position((width-spilKnap.width)/2+screenWidth,height/3+screenHeight)
+  settingKnap.position((width-settingKnap.width)/2+screenWidth,height/3+3*settingKnap.height+screenHeight)
+  nesteLevel.position(width/2+10+screenWidth,height/2+screenHeight)
   spilKnap.mousePressed(levelsShow)
   shopKnap.mousePressed(ShopShow)
   tilbageKnap.mousePressed(StartScreen)
@@ -152,5 +174,6 @@ function MenuSetup(){
     ["billeder/CowboyHat.webp","billeder/Cap.png","billeder/TopHat.webp","billeder/ChefHat.webp",
     "billeder/FlotHat.png","billeder/skibber.png","billeder/GreenHat.png","billeder/TrylleHat.webp"])
   LevelsKnapper()
+
 }
 
