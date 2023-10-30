@@ -43,17 +43,11 @@ function Kollison(Spiller,bane,Hul){
             if(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2) <bane[j].length+Spiller[i].d/2+bane[j].t/2){
               if(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2) >bane[j].length){
                   if(sqrt((Spiller[i].x-x1)**2 + (Spiller[i].y-y1)**2)<Spiller[i].d/2+bane[j].t/2 ||sqrt((Spiller[i].x-x2)**2 + (Spiller[i].y-y2)**2)< Spiller[i].d/2+bane[j].t/2){
-                    //kører, når du kolliderer med kanten
-                    console.log("dav")
+                    //kører, når du kolliderer med kanten (den runde)
                     inangle=PI/2+ang
                     Spiller[i].dir=2*inangle-Spiller[i].dir
-                    if(t*sqrt((xproj-x1)**2 + (yproj-y1)**2)<t*sqrt((xproj-x2)**2 + (yproj-y2)**2)){
-                      xvel=cos(inangle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+cos(Spiller[i].dir)*Spiller[i].speed
-                      yvel=sin(inangle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+sin(Spiller[i].dir)*Spiller[i].speed
-                    }else{
-                      xvel=cos(bane[j].angle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+cos(Spiller[i].dir)*Spiller[i].speed
-                      yvel=sin(bane[j].angle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+sin(Spiller[i].dir)*Spiller[i].speed
-                    }
+                    xvel=cos(inangle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+cos(Spiller[i].dir)*Spiller[i].speed
+                    yvel=sin(inangle -PI/2)*(sqrt((xproj-bane[j].xcent)**2 + (yproj-bane[j].ycent)**2))*bane[j].angvel*1.1+sin(Spiller[i].dir)*Spiller[i].speed
                     Spiller[i].speed=sqrt(xvel**2+yvel**2)
                     Spiller[i].dir=atan2(yvel,xvel)
                   }
@@ -85,5 +79,25 @@ function Kollison(Spiller,bane,Hul){
           ref=(i+1)%2
           Spiller[ref].col=[255,250,0]
         }
+      }
+      if(sqrt((Spiller[0].x-Spiller[1].x)**2+(Spiller[0].y-Spiller[1].y)**2)<Spiller[0].d/2+Spiller[1].d/2){
+        xvel0=cos(Spiller[0].dir)*Spiller[0].speed
+        yvel0=sin(Spiller[0].dir)*Spiller[0].speed
+        xvel1=cos(Spiller[1].dir)*Spiller[1].speed
+        yvel1=sin(Spiller[1].dir)*Spiller[1].speed
+        
+        dist=(Spiller[0].x-Spiller[1].x)**2+(Spiller[0].y-Spiller[1].y)**2
+        change0=((xvel0-xvel1)*(Spiller[0].x-Spiller[1].x) +(yvel0-yvel1)*(Spiller[0].y-Spiller[1].y))/dist
+        change1=((xvel1-xvel0)*(Spiller[1].x-Spiller[0].x) +(yvel1-yvel0)*(Spiller[1].y-Spiller[0].y))/dist
+        
+        xvel0-=change0*(Spiller[0].x-Spiller[1].x)
+        yvel0-=change0*(Spiller[0].y-Spiller[1].y)
+        xvel1-=change1*(Spiller[1].x-Spiller[0].x)
+        yvel1-=change1*(Spiller[1].y-Spiller[0].y)
+
+        Spiller[0].dir=atan2(yvel0,xvel0)
+        Spiller[0].speed=sqrt(xvel0**2+yvel0**2)
+        Spiller[1].dir=atan2(yvel1,xvel1)
+        Spiller[1].speed=sqrt(xvel1**2+yvel1**2)
       }
     }
