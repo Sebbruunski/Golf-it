@@ -93,6 +93,19 @@ function Kollison(Spiller,Bane,Hul){
             }
           }
 
+          if(Bane[j].form=="booster"){
+
+            if(Spiller[i].x-Spiller[i].d/2<Bane[j].x+Bane[j].b/2 && Spiller[i].x+Spiller[i].d/2>Bane[j].x-Bane[j].b/2){
+              if(Spiller[i].y-Spiller[i].d/2<Bane[j].y+Bane[j].h/2 && Spiller[i].y+Spiller[i].d/2>Bane[j].y-Bane[j].b/2){
+                velx=Spiller[i].speed*cos(Spiller[i].dir)+Bane[j].boost[0]
+                vely=Spiller[i].speed*sin(Spiller[i].dir)+Bane[j].boost[1]
+                Spiller[i].dir=atan2(vely,velx)
+                Spiller[i].speed=sqrt(velx**2 +vely**2)
+              }
+            }
+          }
+
+
         }
         if(Hul[i].d/2+Spiller[i].d/2>sqrt((Spiller[i].x-Hul[i].x)**2+(Spiller[i].y-Hul[i].y)**2)){
           Spiller[i].d=0
@@ -119,5 +132,10 @@ function Kollison(Spiller,Bane,Hul){
         Spiller[0].speed=sqrt(xvel0**2+yvel0**2)
         Spiller[1].dir=atan2(yvel1,xvel1)
         Spiller[1].speed=sqrt(xvel1**2+yvel1**2)
+
+        Spiller[0].x+=cos(Spiller[0].dir)*Spiller[0].speed
+        Spiller[0].y+=sin(Spiller[0].dir)*Spiller[0].speed
+        Spiller[1].x+=cos(Spiller[1].dir)*Spiller[1].speed
+        Spiller[1].y+=sin(Spiller[1].dir)*Spiller[1].speed
       }
     }
