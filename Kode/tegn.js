@@ -98,6 +98,23 @@ function Tegn(liste){
             stroke(40)
             strokeWeight(1)
         }
+        if(liste[i].form =="booster"){
+            rect(liste[i].x-liste[i].b/2,liste[i].y-liste[i].h/2,liste[i].b,liste[i].h)
+            let dir=atan2(liste[i].boost[1],liste[i].boost[0])
+            fill(liste[i].col2)
+            stroke(liste[i].col2)
+            triangle(
+            liste[i].x+cos(dir)*liste[i].b/2,
+            liste[i].y+sin(dir)*liste[i].h/2,
+            liste[i].x+cos(dir+PI/2)*liste[i].b/3,
+            liste[i].y+sin(dir+PI/2)*liste[i].h/3,
+            liste[i].x+cos(dir-PI/2)*liste[i].b/3,
+            liste[i].y+sin(dir-PI/2)*liste[i].h/3
+            )
+            strokeWeight(width/200)
+            line(liste[i].x,liste[i].y,liste[i].x-cos(dir)*liste[i].b/3,liste[i].y-sin(dir)*liste[i].h/3)
+            strokeWeight(1)
+        }
     }
 }
 
