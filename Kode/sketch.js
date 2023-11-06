@@ -66,8 +66,21 @@ function setup() {
     ball:[
       {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
       {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
+    }, 
+    //bane index 5
+    {obs:[
+      {form:"rect",x:0,y:0,b:width/10,h:height,col:[30,144,255]},
+      {form:"rect",x:9*width/10,y:0,b:width/10,h:height,col:[30,144,255]},
+      {form:"cir",x:width/2.5,y:height/2,d:4*width/40,col:[139,69,19],speed:0,dir:0}
+    ],
+    hul:[
+      {form:"cir",x:4*width/5,y:width/8,d:width/16,col:[0]},{form:"cir",x:width/5,y:width/8,d:width/16,col:[0]}],
+    ball:[
+      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     } 
   ]
+
   ball = [
     {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0,hat:0},
     {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0,hat:0}

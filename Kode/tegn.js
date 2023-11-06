@@ -72,8 +72,14 @@ function Tegn(liste){
             fill(liste[i].col[0],liste[i].col[1],liste[i].col[2]) 
         }
         if(liste[i].form =="cir"){
+            if(liste[i].col[0]==139){
+                stroke(0)
+            }
+            else
+            {
+                stroke(255-255*i,100,255*i)
+            }
             strokeWeight(width/200)
-            stroke(255-255*i,100,255*i)
             circle(liste[i].x,liste[i].y,liste[i].d)
             stroke(100)
             strokeWeight(1)

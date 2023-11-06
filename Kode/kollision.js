@@ -11,6 +11,14 @@ function Kollison(Spiller,Bane,Hul){
         Spiller[i].y+=sin(Spiller[i].dir)*Spiller[i].speed
       }
       for(let j = 0;j<Bane.length;j++){
+        if(Bane[j].form=="cir"){
+          if(sqrt((Bane[j].x-Spiller[i].x)**2+(Bane[j].y-Spiller[i].y)**2)<Bane[j].d/2+Spiller[i].d/2){
+            ang=atan2(Spiller[i].y-Bane[j].y,Spiller[i].x-Bane[j].x)
+            inangle=PI/2+ang
+            Spiller[i].dir=2*inangle-Spiller[i].dir
+            
+          }
+        }
         if(Bane[j].form=="rect"){
           if (Spiller[i].x + Spiller[i].d/2 + cos(Spiller[i].dir)*Spiller[i].speed > Bane[j].x && 
             Spiller[i].x + cos(Spiller[i].dir)*Spiller[i].speed  < Bane[j].x + Bane[j].b && 
@@ -100,7 +108,7 @@ function Kollison(Spiller,Bane,Hul){
           Spiller[ref].col=[255,250,0]
         }
       }
-      if(sqrt((Spiller[0].x-Spiller[1].x)**2+(Spiller[0].y-Spiller[1].y)**2)<Spiller[0].d/2+Spiller[1].d/2){
+      if(sqrt((Spiller[0].x-Spiller[1].x)**2+(Spiller[0].y-Spiller[1].y)**2)<(Spiller[0].d+Spiller[1].d)/2){
         xvel0=cos(Spiller[0].dir)*Spiller[0].speed
         yvel0=sin(Spiller[0].dir)*Spiller[0].speed
         xvel1=cos(Spiller[1].dir)*Spiller[1].speed
