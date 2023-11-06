@@ -7,7 +7,7 @@ bane = []
 let levelNummer = 0;
 let cnv;
 function setup() {
-  cnv = createCanvas(600, 600);
+  cnv = createCanvas(450, 450);
   screenHeight = windowHeight/2-canvas.height/4
   screenWidth = windowWidth/2-canvas.width/4
   cnv.position(windowWidth/2-canvas.width/4,screenHeight)
@@ -64,8 +64,8 @@ function setup() {
     hul:[
       {form:"cir",x:4*width/5,y:width/8,d:width/16,col:[0]},{form:"cir",x:width/5,y:width/8,d:width/16,col:[0]}],
     ball:[
-      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
-      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
+      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     },
     //bane index 5
     {

@@ -16,7 +16,6 @@ function Kollison(Spiller,Bane,Hul){
             ang=atan2(Spiller[i].y-Bane[j].y,Spiller[i].x-Bane[j].x)
             inangle=PI/2+ang
             Spiller[i].dir=2*inangle-Spiller[i].dir
-            
           }
         }
         if(Bane[j].form=="rect"){
