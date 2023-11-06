@@ -7,7 +7,7 @@ bane = []
 let levelNummer = 0;
 let cnv;
 function setup() {
-  cnv = createCanvas(600, 600);
+  cnv = createCanvas(450, 450);
   screenHeight = windowHeight/2-canvas.height/4
   screenWidth = windowWidth/2-canvas.width/4
   cnv.position(windowWidth/2-canvas.width/4,screenHeight)
