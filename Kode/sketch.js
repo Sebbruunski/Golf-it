@@ -106,7 +106,6 @@ function Level(){
   for(let i =0; i<levelsKnapper.length;i++){
     levelsKnapper[i].hide()
   }
-  tilbageKnap.hide()
   //hvis en hat er aktiveret skal den vise
   if(hat[0]!=0){
     ball[0].hat.show()
@@ -125,6 +124,7 @@ function Level(){
   ball[1].speed=0
   //sætter state til play
   state = "play"
+  tilbageKnap.position(windowWidth-tilbageKnap.width-10,windowHeight-tilbageKnap.height-10)
 }
 
 
