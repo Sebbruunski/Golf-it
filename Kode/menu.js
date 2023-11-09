@@ -47,6 +47,9 @@ function MellemLevels(){
 }
 
 function StartScreen(){
+    state = "startscreen"
+    skud = 0
+    ref = 0 
     tilbageKnap.position(0+screenWidth,7*height/8+screenHeight)
     nesteLevel.hide()
     tilbageKnap.hide()
@@ -111,7 +114,7 @@ function NextLevel(){
   if(levelNummer<bane.length-1){
     levelNummer += 1
   }
-  tilbageKnap.hide()
+  tilbageKnap.position(windowWidth-tilbageKnap.width-10,windowHeight-tilbageKnap.height-10)
   nesteLevel.hide()
   if(hat[0]!=0){
     ball[0].hat.show()

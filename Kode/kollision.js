@@ -41,6 +41,7 @@ function Kollison(Spiller,Bane,Hul){
               Spiller[i].y=bane[levelNummer].ball[i].y
               Spiller[i].d=bane[levelNummer].ball[i].d
               Spiller[i].speed=0
+              skud++
             }
           }
           if (Spiller[i].x + Spiller[i].d/2 > Bane[j].x && 
@@ -58,6 +59,7 @@ function Kollison(Spiller,Bane,Hul){
               Spiller[i].y=bane[levelNummer].ball[i].y
               Spiller[i].d=bane[levelNummer].ball[i].d
               Spiller[i].speed=0
+              skud++
             }
           }
 

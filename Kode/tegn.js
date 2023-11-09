@@ -3,10 +3,11 @@ function TegnDraw(){
     noStroke()
     Grid(40)
     stroke(100)
+    //Tegn(bane[levelNummer].hul)
     Tegn(bane[levelNummer].hul)
     Tegn(bane[levelNummer].obs)
     Tegn(ball)
-    //tegn pil
+    //Tjekker om bold med hat er kommet i hullet.
     if(ball[0].d<1&hat[0]!=0){
         ball[0].hat.hide() 
     }
