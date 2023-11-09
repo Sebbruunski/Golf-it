@@ -67,7 +67,7 @@ function setup() {
       {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
       {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     },
-    //bane index 7
+    //bane index 5
     {
       obs:[
         {form:"booster",x:width/4,y:2*height/5,b:width/10,h:height/10,boost:[width/1000,0],col:[139,69,19],col2:[255,0,255]},
@@ -81,7 +81,48 @@ function setup() {
         {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
         {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}
       ]
-    }
+    },
+    //bane index 6
+    {obs:[
+      {form:"booster",x:width/10,y:9*height/10,b:width/10,h:height/10,boost:[width/5000,-width/2000],col:[139,69,19],col2:[255,0,255]},
+      {form:"booster",x:9*width/10,y:9*height/10,b:width/10,h:height/10,boost:[-width/5000,-width/2000],col:[139,69,19],col2:[255,0,255]},
+      {form:"cir",x:width/2,y:15*height/16,d:width/8,col:[139,69,19]},
+      {form:"line",xcent:11*width/12,ycent:height/5,length:width/5,angle:4*PI/10,t:20,angvel:0, col:[139,69,19]},
+      {form:"line",xcent:width/12,ycent:height/5,length:width/5,angle:6*PI/10,t:20,angvel:0, col:[139,69,19]},
+      {form:"line",xcent:width/2,ycent:2*height/3,length:width/6,angle:PI/2,t:10,angvel:PI/192, col:[139,69,19]},
+      {form:"line",xcent:width/2,ycent:2*height/3,length:width/6,angle:PI/4,t:10,angvel:PI/192, col:[139,69,19]},
+      {form:"rect",x:15*width/32,y:2*height/10,b:width/16,h:height/4,col:[139,69,19]}
+    ],
+    hul:[
+      {form:"cir",x:4*width/5,y:width/8,d:width/16,col:[0]},
+      {form:"cir",x:width/5,y:width/8,d:width/16,col:[0]}
+    ],
+    ball:[
+      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}
+    ]},
+    //bane index 7
+    {
+    obs:[
+      {form:"line",xcent:3*width/8,ycent:6*height/8,length:3*width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+      {form:"line",xcent:6*width/8,ycent:3*height/8,length:3*width/8,angle:PI/2,t:10,angvel:0,col:[139,69,19]},
+      {form:"line",xcent:4*width/8,ycent:4*height/8,length:2*width/8,angle:PI/2,t:10,angvel:0,col:[139,69,19]},
+      {form:"line",xcent:3*width/8,ycent:2*height/8,length:1*width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+      {form:"line",xcent:width/8,ycent:4*height/8,length:width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+      {form:"line",xcent:7*width/8,ycent:7*height/8,length:sqrt(2)*width/8,angle:3*PI/4,t:10,angvel:0,col:[139,69,19]},
+      {form:"booster",x:3*width/8,y:5*height/8,b:width/8,h:height/8,boost:[-width/1000,-width/1000],col:[139,69,19],col2:[255,0,255]},
+      {form:"booster",x:width/8,y:height/8,b:width/8,h:height/8,boost:[width/1000,width/1000],col:[139,69,19],col2:[255,0,255]},
+      {form:"booster",x:5*width/8,y:height/8,b:width/8,h:height/8,boost:[-width/1000,width/1000],col:[139,69,19],col2:[255,0,255]}
+    ],
+    hul:[
+      {form:"cir",x:5*width/8,y:5*width/8,d:width/16,col:[0]},
+      {form:"cir",x:7*width/8,y:width/8,d:width/16,col:[0]}
+    ],
+    ball:[
+      {form:"cir",x:width/8,y:5*height/8,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:width/8,y:7*height/8,d:1.5*width/40,col:[255],speed:0,dir:0}
+    ]}
+
   ]
 
   ball = [

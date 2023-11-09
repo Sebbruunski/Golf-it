@@ -120,7 +120,7 @@ function Kollison(Spiller,Bane,Hul){
           Spiller[ref].col=[255,250,0]
         }
       }
-      if(sqrt((Spiller[0].x-Spiller[1].x)**2+(Spiller[0].y-Spiller[1].y)**2)<(Spiller[0].d+Spiller[1].d)/2){
+      if(sqrt((Spiller[0].x-Spiller[1].x)**2+(Spiller[0].y-Spiller[1].y)**2)<(Spiller[0].d+Spiller[1].d)/2 && Spiller[0].d>1 && Spiller[1].d>1){
         xvel0=cos(Spiller[0].dir)*Spiller[0].speed
         yvel0=sin(Spiller[0].dir)*Spiller[0].speed
         xvel1=cos(Spiller[1].dir)*Spiller[1].speed
