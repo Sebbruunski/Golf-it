@@ -1,16 +1,13 @@
-state = "startScreen"
-let coins = 0;
-pindMidt = 8
-hul = []
-ball = []
-bane = []
-let levelNummer = 0;
-let cnv;
+state = "startScreen" //Har to tilstande play og startScreen
+let coins = 0;        //coins bruges i shoppen
+bane = []             //Indholder alle bane designs index er udtryk for level nummer
+let levelNummer = 0;  //levelnummer refferer til et objekti i bane
+let cnv;              //Indeholder canvas div
 function setup() {
   cnv = createCanvas(450, 450);
-  screenHeight = windowHeight/2-canvas.height/4
-  screenWidth = windowWidth/2-canvas.width/4
-  cnv.position(windowWidth/2-canvas.width/4,screenHeight)
+  screenHeight = windowHeight/2-canvas.height/4             //Beskrive hjørnepos af canvas iforhold til bredde.
+  screenWidth = windowWidth/2-canvas.width/4                //Beskrive hjørnepos af canvas iforhold til højde.
+  cnv.position(screenWidth,screenHeight)                    //Placere canvas i midten af vinduet
   
   bane = [
     //bane index 0
@@ -125,28 +122,35 @@ function setup() {
 
   ]
 
+  //ball listen indenholder de to bolde der skydes til som et objekt
   ball = [
     {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0,hat:0},
     {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0,hat:0}
   ]
+  //sørger for man ikke kan skyde med det samme
   skyd = false 
+  //ref er en refference til den bold man har trykket på og vil skyde til
   ref=0
+  //Kalder MenuSetup som er under menu.js
   MenuSetup()
 }
 
 
 //Bliver kaldt når der er trykket på et vilkårligt level.
 function Level(){
-  levelNummer = floor((mouseX-levelsKnapper[0].width)*(5/width))+floor(mouseY*(5/height))*4-4  //Finder det level man har trykket på.
+  //finder levelet der er trykket på via mussens position
+  levelNummer = floor((mouseX-levelsKnapper[0].width)*(5/width))+floor(mouseY*(5/height))*4-4 
+  //hider alle knapper da spillet skal starte
   for(let i =0; i<levelsKnapper.length;i++){
     levelsKnapper[i].hide()
   }
   tilbageKnap.hide()
+  //hvis en hat er aktiveret skal den vise
   if(hat[0]!=0){
     ball[0].hat.show()
     ball[1].hat.show()
   }
-  console.log(levelNummer)
+  //Søger for at ball objektet er ligmed banen 
   ball[0].x=bane[levelNummer].ball[0].x
   ball[0].y=bane[levelNummer].ball[0].y
   ball[0].d=bane[levelNummer].ball[0].d
@@ -157,27 +161,39 @@ function Level(){
   ball[1].col= [255]
   ball[0].speed=0
   ball[1].speed=0
+  //sætter state til play
   state = "play"
 }
 
 
 function draw() {
+  //hvis spillet skal spilles er state play
   if (state == "play"){
+    //Tjekker om diameteren af bolden er mindre end en og dermed om der har ramt hullet
     if(ball[0].d<1&&ball[1].d<1){
+      //giver tre coins for at klare et level
       coins+=3
+      //state er startScreen men dette er i teorien ligegyldigt den skal bare være alt andet en play
       state = "startScreen"
+      //Man kan ikke skyde under startskrærmen
       skyd = false
+      //Kalder mellemlevels menuen
       MellemLevels()
+      //Sørger for der ikke er en refferece bold
       ref =0
     }
+    //Flytter bolden i x og y retningen alt efter retningen og farten
     ball[0].x+=cos(ball[0].dir)*ball[0].speed
     ball[1].x+=cos(ball[1].dir)*ball[1].speed
     ball[0].y+=sin(ball[0].dir)*ball[0].speed
     ball[1].y+=sin(ball[1].dir)*ball[1].speed
+    //Hvis en hat er aktiveret skal den sættet oven på bolden
     if(hat[0]!=0){
       ball[0].hat.position(ball[0].x-ball[0].d/1.7+screenWidth,ball[0].y-ball[0].d+screenHeight)
       ball[1].hat.position(ball[1].x-ball[1].d/1.7+screenWidth,ball[1].y-ball[1].d+screenHeight)
     }
+    //hvis skyd er false skal dir være den modsatte retning af musen og 
+    //hvis man trykker skal længden af pilen være propotional til længden af pilen
     if(skyd == false){
       ball[0].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
       ball[1].dir =atan2((ball[ref].y-mouseY),(ball[ref].x-mouseX))
@@ -204,6 +220,7 @@ function draw() {
         }
       }
     }
+    //Friktion hvor farten under en værdi bliver sat ligmed nul
     if(ball[0].speed>width/4000 & ball[0].d>1){
       ball[0].speed -=width/20000
       skyd=true
@@ -216,13 +233,17 @@ function draw() {
     }else{ 
       ball[1].speed =0
     }
+    //hvis begge bold står stille skal man kunne skyde igen
     if(ball[0].speed ==0 & ball[1].speed ==0){
       skyd=false
     }
   }
   strokeWeight(1)
+  //kollisons funktion indeholder tre lister henholdsvis boldene, baneforhindringerne og hullerne
   Kollison(ball,bane[levelNummer].obs,bane[levelNummer].hul)
+  //tegner de ting der skal tegnes
   TegnDraw()
+  //displayer altid coins oppe i højre hjørne
   fill(255,255,0)
   stroke(10)
   textSize(25)

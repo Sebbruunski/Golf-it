@@ -1,16 +1,22 @@
+//kollisons funktion indeholder tre lister henholdsvis boldene, baneforhindringerne og hullern
 function Kollison(Spiller,Bane,Hul){
+  //da alle kollisoner forgår mellem boldene og et eller andet køres et for-loop med spiller længden
     for(let i = 0;i<Spiller.length;i++){
+      //Hvis man kolidere med y kanten
       if(Spiller[i].x-Spiller[i].d/2<0||Spiller[i].x+Spiller[i].d/2>width){
         Spiller[i].dir =90*(PI/2)-Spiller[i].dir
         Spiller[i].x+=cos(Spiller[i].dir)*Spiller[i].speed
         Spiller[i].y+=sin(Spiller[i].dir)*Spiller[i].speed
       }
+      //Hvis man kolidere med x kanten 
       if(Spiller[i].y-Spiller[i].d/2<0||Spiller[i].y+Spiller[i].d/2>height){
         Spiller[i].dir =Spiller[i].dir*(-1)
         Spiller[i].x+=cos(Spiller[i].dir)*Spiller[i].speed
         Spiller[i].y+=sin(Spiller[i].dir)*Spiller[i].speed
       }
+      //løber igennem alle forhindinger
       for(let j = 0;j<Bane.length;j++){
+        //hvis forhindingen er en cirkel
         if(Bane[j].form=="cir"){
           if(sqrt((Bane[j].x-Spiller[i].x)**2+(Bane[j].y-Spiller[i].y)**2)<Bane[j].d/2+Spiller[i].d/2){
             ang=atan2(Spiller[i].y-Bane[j].y,Spiller[i].x-Bane[j].x)
@@ -18,6 +24,7 @@ function Kollison(Spiller,Bane,Hul){
             Spiller[i].dir=2*inangle-Spiller[i].dir
           }
         }
+        //Hvis forhindingen er en rektangel
         if(Bane[j].form=="rect"){
           if (Spiller[i].x + Spiller[i].d/2 + cos(Spiller[i].dir)*Spiller[i].speed > Bane[j].x && 
             Spiller[i].x + cos(Spiller[i].dir)*Spiller[i].speed  < Bane[j].x + Bane[j].b && 
@@ -28,6 +35,7 @@ function Kollison(Spiller,Bane,Hul){
             if(Bane[j].col[0]==139){
              Spiller[i].dir =90*(PI/2)-Spiller[i].dir
             }
+            //hvis det er en blå forhindring aka vand
             if(Bane[j].col[0]==30){
               Spiller[i].x=bane[levelNummer].ball[i].x
               Spiller[i].y=bane[levelNummer].ball[i].y
@@ -54,6 +62,7 @@ function Kollison(Spiller,Bane,Hul){
           }
 
         }
+        //hvis man har en linje kollision
         if(Bane[j].form=="line"){
           xproj = Spiller[i].x - cos(Bane[j].angle+PI/2)*(cos(Bane[j].angle+PI/2)*(Spiller[i].x-Bane[j].xcent) + sin(Bane[j].angle+PI/2)*(Spiller[i].y-Bane[j].ycent))
           yproj = Spiller[i].y - sin(Bane[j].angle+PI/2)*(cos(Bane[j].angle+PI/2)*(Spiller[i].x-Bane[j].xcent) + sin(Bane[j].angle+PI/2)*(Spiller[i].y-Bane[j].ycent))
@@ -99,9 +108,8 @@ function Kollison(Spiller,Bane,Hul){
               }
             }
           }
-
+          //hvis man kolidere med en boster
           if(Bane[j].form=="booster"){
-
             if(Spiller[i].x-Spiller[i].d/2<Bane[j].x+Bane[j].b/2 && Spiller[i].x+Spiller[i].d/2>Bane[j].x-Bane[j].b/2){
               if(Spiller[i].y-Spiller[i].d/2<Bane[j].y+Bane[j].h/2 && Spiller[i].y+Spiller[i].d/2>Bane[j].y-Bane[j].b/2){
                 velx=Spiller[i].speed*cos(Spiller[i].dir)+Bane[j].boost[0]
@@ -114,13 +122,15 @@ function Kollison(Spiller,Bane,Hul){
 
 
         }
+        //Hvis den rigtig bold kommer i det rigtige hul
         if(Hul[i].d/2+Spiller[i].d/2>sqrt((Spiller[i].x-Hul[i].x)**2+(Spiller[i].y-Hul[i].y)**2)){
           Spiller[i].d=0
           ref=(i+1)%2
           Spiller[ref].col=[255,250,0]
         }
       }
-      if(sqrt((Spiller[0].x-Spiller[1].x)**2+(Spiller[0].y-Spiller[1].y)**2)<(Spiller[0].d+Spiller[1].d)/2 && Spiller[0].d>1 && Spiller[1].d>1){
+      //Hvis de to bold man skyder til rammer hinanden
+      if(sqrt((Spiller[0].x-Spiller[1].x)**2+(Spiller[0].y-Spiller[1].y)**2)<(Spiller[0].d+Spiller[1].d)/2){
         xvel0=cos(Spiller[0].dir)*Spiller[0].speed
         yvel0=sin(Spiller[0].dir)*Spiller[0].speed
         xvel1=cos(Spiller[1].dir)*Spiller[1].speed

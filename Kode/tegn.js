@@ -3,16 +3,24 @@ function TegnDraw(){
     noStroke()
     Grid(40)
     stroke(100)
+<<<<<<< HEAD
     Tegn(bane[levelNummer].hul)
     Tegn(bane[levelNummer].obs)
     Tegn(ball)
     //tegn pil
+=======
+    Tegn(ball)
+    //Tegn(bane[levelNummer].hul)
+    Tegn(bane[levelNummer])
+    //Tjekker om bold med hat er kommet i hullet.
+>>>>>>> 8ec37908490894e5c385960f9e010d75d0ff8f3e
     if(ball[0].d<1&hat[0]!=0){
         ball[0].hat.hide() 
     }
     if(ball[1].d<1&hat[0]!=0){
         ball[1].hat.hide() 
     } 
+    //tegn pil hvis man må skyde til bolden
     if(skyd==false){
         if(ball[1].col.length>2||ball[0].col.length>2){
             strokeWeight(width/100)
