@@ -118,8 +118,28 @@ function setup() {
     ball:[
       {form:"cir",x:width/8,y:5*height/8,d:1.5*width/40,col:[255],speed:0,dir:0},
       {form:"cir",x:width/8,y:7*height/8,d:1.5*width/40,col:[255],speed:0,dir:0}
+    ]},
+    //bane index 8
+    {
+    obs:[
+      {form:"line",xcent:3*width/8,ycent:6*height/8,length:3*width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+      {form:"portal",xcent:4*width/8,ycent:5*height/8,length:width/10,angle:PI/2,t:10,angvel:0,col:[200,0,200],link:2},
+      {form:"portal",xcent:4*width/8,ycent:2*height/8,length:width/10,angle:PI/2,t:10,angvel:0,col:[200,0,200],link:1},
+      {form:"portal",xcent:6*width/8,ycent:7*height/8,length:width/10,angle:PI/2,t:10,angvel:0,col:[255,0,255],link:4},
+      {form:"portal",xcent:7*width/8,ycent:6*height/8,length:width/10,angle:0,t:10,angvel:0,col:[255,0,255],link:3},
+      {form:"line",xcent:6*width/8,ycent:3*height/8,length:3*width/8,angle:PI/2,t:10,angvel:0,col:[139,69,19]},
+      {form:"line",xcent:2.9*width/8,ycent:3.1*height/8,length:1.2*width/8,angle:3*PI/4,t:10,angvel:0,col:[139,69,19]},
+      {form:"line",xcent:width/8,ycent:4*height/8,length:width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+      
+    ],
+    hul:[
+      {form:"cir",x:5*width/8,y:width/8,d:width/16,col:[0]},
+      {form:"cir",x:7*width/8,y:width/8,d:width/16,col:[0]}
+    ],
+    ball:[
+      {form:"cir",x:width/8,y:5*height/8,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:width/8,y:7*height/8,d:1.5*width/40,col:[255],speed:0,dir:0}
     ]}
-
   ]
 
   //ball listen indenholder de to bolde der skydes til som et objekt

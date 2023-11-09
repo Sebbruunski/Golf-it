@@ -108,6 +108,31 @@ function Kollison(Spiller,Bane,Hul){
               }
             }
           }
+          //hvis man kolliderer med en portal (bruger en collision, der minder meget om line collision)
+          if(Bane[j].form=="portal"){
+            xproj = Spiller[i].x - cos(Bane[j].angle+PI/2)*(cos(Bane[j].angle+PI/2)*(Spiller[i].x-Bane[j].xcent) + sin(Bane[j].angle+PI/2)*(Spiller[i].y-Bane[j].ycent))
+            yproj = Spiller[i].y - sin(Bane[j].angle+PI/2)*(cos(Bane[j].angle+PI/2)*(Spiller[i].x-Bane[j].xcent) + sin(Bane[j].angle+PI/2)*(Spiller[i].y-Bane[j].ycent))
+            t=(cos(Bane[j].angle+PI/2)*(Spiller[i].x-Bane[j].xcent) + sin(Bane[j].angle+PI/2)*(Spiller[i].y-Bane[j].ycent))
+            d=sqrt((xproj-Bane[j].xcent)**2 + (yproj-Bane[j].ycent)**2)
+            x1=Bane[j].xcent+cos(Bane[j].angle)*Bane[j].length
+            y1=Bane[j].ycent+sin(Bane[j].angle)*Bane[j].length
+            x2=Bane[j].xcent-cos(Bane[j].angle)*Bane[j].length
+            y2=Bane[j].ycent-sin(Bane[j].angle)*Bane[j].length
+
+            if(sqrt((xproj-Spiller[i].x)**2 + (yproj-Spiller[i].y)**2) <Spiller[i].d/2+Bane[j].t/2){
+              if(d <Bane[j].length+Spiller[i].d/2+Bane[j].t/2){
+                Spiller[i].dir=Spiller[i].dir-Bane[j].angle+Bane[Bane[j].link].angle
+                if(sqrt((xproj-x1)**2 + (yproj-y1)**2)>sqrt((xproj-x2)**2 + (yproj-y2)**2)){
+                  Spiller[i].x=Bane[Bane[j].link].xcent - d*cos(Bane[Bane[j].link].angle) - cos(Bane[Bane[j].link].angle+PI/2)*t*1.1
+                  Spiller[i].y=Bane[Bane[j].link].ycent - d*sin(Bane[Bane[j].link].angle) - sin(Bane[Bane[j].link].angle+PI/2)*t*1.1
+                }else{
+                  Spiller[i].x=Bane[Bane[j].link].xcent + d*cos(Bane[Bane[j].link].angle) - cos(Bane[Bane[j].link].angle+PI/2)*t*1.1
+                  Spiller[i].y=Bane[Bane[j].link].ycent + d*sin(Bane[Bane[j].link].angle) - sin(Bane[Bane[j].link].angle+PI/2)*t*1.1
+                }
+                return 1
+              }
+            }
+          }
           //hvis man kolidere med en boster
           if(Bane[j].form=="booster"){
             if(Spiller[i].x-Spiller[i].d/2<Bane[j].x+Bane[j].b/2 && Spiller[i].x+Spiller[i].d/2>Bane[j].x-Bane[j].b/2){
