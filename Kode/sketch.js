@@ -3,6 +3,9 @@ let coins = 0;        //coins bruges i shoppen
 bane = []             //Indholder alle bane designs index er udtryk for level nummer
 let levelNummer = 0;  //levelnummer refferer til et objekti i bane
 let cnv;              //Indeholder canvas div
+let levelCoins = [1,1,2,2,3,3,4]
+let levelMaxStroke = [2,2,2,2,2,2]
+let skud = 0;
 function setup() {
   cnv = createCanvas(450, 450);
   screenHeight = windowHeight/2-canvas.height/4             //Beskrive hjørnepos af canvas iforhold til bredde.
@@ -61,10 +64,10 @@ function setup() {
     hul:[
       {form:"cir",x:4*width/5,y:width/8,d:width/16,col:[0]},{form:"cir",x:width/5,y:width/8,d:width/16,col:[0]}],
     ball:[
-      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
-      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
+      {form:"cir",x:3*width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0},
+      {form:"cir",x:width/4,y:15*height/16,d:1.5*width/40,col:[255],speed:0,dir:0}]
     },
-    //bane index 7
+    //bane index 5
     {
       obs:[
         {form:"booster",x:width/4,y:2*height/5,b:width/10,h:height/10,boost:[width/1000,0],col:[139,69,19],col2:[255,0,255]},
@@ -126,12 +129,35 @@ function Level(){
 
 
 function draw() {
+  //tegner de ting der skal tegnes
+  TegnDraw()
   //hvis spillet skal spilles er state play
   if (state == "play"){
+    stroke(0)
+    fill(255)
+    text(skud,20,20)
+    fill(255,0,0)
+    text(levelMaxStroke[levelNummer],2,20)
+    //Tjekker om man har brugt maks skud
+    if(skud>levelMaxStroke[levelNummer]-1&&skyd==false){
+      skud = 0
+      ref =0
+      ball[0].x=bane[levelNummer].ball[0].x
+      ball[0].y=bane[levelNummer].ball[0].y
+      ball[0].d=bane[levelNummer].ball[0].d
+      ball[1].x=bane[levelNummer].ball[1].x
+      ball[1].y=bane[levelNummer].ball[1].y
+      ball[1].d=bane[levelNummer].ball[1].d
+      ball[0].col= [255]
+      ball[1].col= [255]
+      ball[0].speed=0
+      ball[1].speed=0
+    }
+
     //Tjekker om diameteren af bolden er mindre end en og dermed om der har ramt hullet
     if(ball[0].d<1&&ball[1].d<1){
-      //giver tre coins for at klare et level
-      coins+=3
+      //giver  coins for at klare et level
+      coins+=levelCoins[levelNummer]
       //state er startScreen men dette er i teorien ligegyldigt den skal bare være alt andet en play
       state = "startScreen"
       //Man kan ikke skyde under startskrærmen
@@ -140,6 +166,7 @@ function draw() {
       MellemLevels()
       //Sørger for der ikke er en refferece bold
       ref =0
+      skud = 0
     }
     //Flytter bolden i x og y retningen alt efter retningen og farten
     ball[0].x+=cos(ball[0].dir)*ball[0].speed
@@ -167,7 +194,7 @@ function draw() {
           ball[0].col=[255]
         }else if(ball[1].col.length>2||ball[0].col.length>2){
         skyd = true
-        
+        skud++
         if(sqrt((ball[ref].x-mouseX)**2+(ball[ref].y-mouseY)**2)>width/3){
           ball[1].speed =width/75
           ball[0].speed =width/75
@@ -200,8 +227,6 @@ function draw() {
   strokeWeight(1)
   //kollisons funktion indeholder tre lister henholdsvis boldene, baneforhindringerne og hullerne
   Kollison(ball,bane[levelNummer].obs,bane[levelNummer].hul)
-  //tegner de ting der skal tegnes
-  TegnDraw()
   //displayer altid coins oppe i højre hjørne
   fill(255,255,0)
   stroke(10)
