@@ -17,6 +17,7 @@ function LevelsKnapper(){
   for(let i =0; i<bane.length;i++){
     levelsKnapper.push(createButton(i+1))
     levelsKnapper[i].position((i%4+1)*width/5-levelsKnapper[i].width/2+screenWidth,floor((i+4)/4)*height/5+screenHeight)
+    levelsKnapper[i].size(height/7,width/7)
     levelsKnapper[i].mousePressed(Level)
     levelsKnapper[i].hide()
   }
