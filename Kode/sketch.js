@@ -4,7 +4,7 @@ bane = []             //Indholder alle bane designs index er udtryk for level nu
 let levelNummer = 0;  //levelnummer refferer til et objekti i bane
 let cnv;              //Indeholder canvas div
 let levelCoins = [1,1,2,2,3,3,4]
-let levelMaxStroke = [2,2,2,2,2,2]
+let levelMaxStroke = [2,2,2,2,2,2,2,2,2,3,3,3]
 let skud = 0;
 function setup() {
   cnv = createCanvas(450, 450);
@@ -142,7 +142,82 @@ function setup() {
     ball:[
       {form:"cir",x:width/8,y:5*height/8,d:1.5*width/40,col:[255],speed:0,dir:0},
       {form:"cir",x:width/8,y:7*height/8,d:1.5*width/40,col:[255],speed:0,dir:0}
-    ]}
+    ]},
+    //bane index 9
+    {
+      obs:[
+        {form:"line",xcent:4*width/8,ycent:5*height/8,length:3*width/8,angle:PI/2,t:10,angvel:0,col:[139,69,19]},
+        {form:"portal",xcent:0.1*width/8,ycent:5*height/8,length:width/10,angle:PI/2,t:10,angvel:0,col:[200,0,200],link:2},
+        {form:"portal",xcent:7.9*width/8,ycent:3*height/8,length:width/10,angle:PI/2,t:10,angvel:0,col:[200,0,200],link:1},
+        {form:"line",xcent:4*width/8,ycent:2*height/8,length:1*width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+        {form:"line",xcent:2*width/8,ycent:4*height/8,length:2*width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+        {form:"line",xcent:7*width/8,ycent:4*height/8,length:1*width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+        {form:"booster",x:5*width/8,y:4*height/8,b:width/8,h:height/8,boost:[width/2000,-width/2000],col:[139,69,19],col2:[255,0,255]},
+        {form:"rect",x:0,y:2.08*width/8,b:3.92*width/8,h:1.85*height/8,col:[30,144,255]},
+        {form:"rect",x:7.5*width/8,y:4.08*width/8,b:0.5*width/8,h:3.92*height/8,col:[30,144,255]},
+        {form:"line",xcent:7*width/8,ycent:6*height/8,length:1*width/8,angle:0,t:10,angvel:PI/192,col:[139,69,19]},
+        {form:"cir",x:2*width/8,y:2*width/8,d:width/16,col:[139,69,19]}
+      ],
+      hul:[
+        {form:"cir",x:1*width/8,y:width/8,d:width/16,col:[0]},
+        {form:"cir",x:7*width/8,y:width/8,d:width/16,col:[0]}
+      ],
+      ball:[
+        {form:"cir",x:width/8,y:7*height/8,d:1.5*width/40,col:[255],speed:0,dir:0},
+        {form:"cir",x:5*width/8,y:7*height/8,d:1.5*width/40,col:[255],speed:0,dir:0}
+      ]},
+      //bane index 10
+      {
+      obs:[
+        {form:"line",xcent:4*width/8,ycent:5*height/8,length:3*width/8,angle:PI/2,t:10,angvel:0,col:[139,69,19]},
+        {form:"portal",xcent:1*width/8,ycent:0.1*height/8,length:width/10,angle:0,t:10,angvel:0,col:[200,0,200],link:2},
+        {form:"portal",xcent:3.9*width/8,ycent:1*height/8,length:width/10,angle:3*PI/2,t:10,angvel:0,col:[200,0,200],link:1},
+        {form:"portal",xcent:7*width/8,ycent:0.1*height/8,length:width/10,angle:0,t:10,angvel:0,col:[255,0,255],link:4},
+        {form:"portal",xcent:4.1*width/8,ycent:1*height/8,length:width/10,angle:PI/2,t:10,angvel:0,col:[255,0,255],link:3},
+        {form:"line",xcent:6*width/8,ycent:1*height/8,length:1*width/8,angle:PI/2,t:10,angvel:0,col:[139,69,19]},
+        {form:"line",xcent:2*width/8,ycent:1*height/8,length:1*width/8,angle:PI/2,t:10,angvel:0,col:[139,69,19]},
+        {form:"line",xcent:4*width/8,ycent:2*height/8,length:2*width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+        {form:"booster",x:2.5*width/8,y:4*height/8,b:width/8,h:height/8,boost:[-width/2000,0],col:[139,69,19],col2:[255,0,255]},
+        {form:"line",xcent:7*width/8,ycent:5*height/8,length:1*width/8,angle:0,t:10,angvel:PI/192,col:[139,69,19]},
+        {form:"rect",x:3*width/8,y:2.08*width/8,b:0.92*width/8,h:5.92*height/8,col:[30,144,255]},
+        {form:"rect",x:4.08*width/8,y:2.08*width/8,b:1.92*width/8,h:1.92*height/8,col:[30,144,255]},
+        {form:"line",xcent:1*width/8,ycent:4*height/8,length:1*width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+      ],
+      hul:[
+        {form:"cir",x:3*width/8,y:width/8,d:width/16,col:[0]},
+        {form:"cir",x:5*width/8,y:width/8,d:width/16,col:[0]}
+      ],
+      ball:[
+        {form:"cir",x:width/8,y:7*height/8,d:1.5*width/40,col:[255],speed:0,dir:0},
+        {form:"cir",x:5*width/8,y:7*height/8,d:1.5*width/40,col:[255],speed:0,dir:0}
+      ]},
+      //bane index 11
+      {
+        obs:[
+          {form:"line",xcent:4*width/8,ycent:5*height/8,length:3*width/8,angle:PI/2,t:10,angvel:0,col:[139,69,19]},
+          {form:"portal",xcent:1*width/8,ycent:0.1*height/8,length:width/10,angle:0,t:10,angvel:0,col:[200,0,200],link:2},
+          {form:"portal",xcent:3.9*width/8,ycent:1*height/8,length:width/10,angle:3*PI/2,t:10,angvel:0,col:[200,0,200],link:1},
+          {form:"portal",xcent:7*width/8,ycent:0.1*height/8,length:width/10,angle:0,t:10,angvel:0,col:[255,0,255],link:4},
+          {form:"portal",xcent:4.1*width/8,ycent:1*height/8,length:width/10,angle:PI/2,t:10,angvel:0,col:[255,0,255],link:3},
+          {form:"line",xcent:6*width/8,ycent:1*height/8,length:1*width/8,angle:PI/2,t:10,angvel:0,col:[139,69,19]},
+          {form:"line",xcent:2*width/8,ycent:1*height/8,length:1*width/8,angle:PI/2,t:10,angvel:0,col:[139,69,19]},
+          {form:"line",xcent:4*width/8,ycent:2*height/8,length:2*width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+          {form:"booster",x:2.5*width/8,y:4*height/8,b:width/8,h:height/8,boost:[-width/2000,0],col:[139,69,19],col2:[255,0,255]},
+          {form:"booster",x:7*width/8,y:3*height/8,b:width/8,h:height/8,boost:[0,-width/4000],col:[139,69,19],col2:[255,0,255]},
+          {form:"booster",x:7*width/8,y:4*height/8,b:width/8,h:height/8,boost:[0,width/4000],col:[139,69,19],col2:[255,0,255]},
+          {form:"line",xcent:7*width/8,ycent:5*height/8,length:1*width/8,angle:0,t:10,angvel:PI/192,col:[139,69,19]},
+          {form:"rect",x:3*width/8,y:2.08*width/8,b:0.92*width/8,h:5.92*height/8,col:[30,144,255]},
+          {form:"rect",x:4.08*width/8,y:2.08*width/8,b:1.92*width/8,h:1.92*height/8,col:[30,144,255]},
+          {form:"line",xcent:1*width/8,ycent:4*height/8,length:1*width/8,angle:0,t:10,angvel:0,col:[139,69,19]},
+        ],
+        hul:[
+          {form:"cir",x:3*width/8,y:width/8,d:width/16,col:[0]},
+          {form:"cir",x:5*width/8,y:width/8,d:width/16,col:[0]}
+        ],
+        ball:[
+          {form:"cir",x:width/8,y:7*height/8,d:1.5*width/40,col:[255],speed:0,dir:0},
+          {form:"cir",x:5*width/8,y:7*height/8,d:1.5*width/40,col:[255],speed:0,dir:0}
+        ]}
   ]
 
   //ball listen indenholder de to bolde der skydes til som et objekt
