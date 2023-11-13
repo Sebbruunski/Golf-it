@@ -104,8 +104,9 @@ function Tegn(liste){
         if(liste[i].form =="booster"){
             rect(liste[i].x-liste[i].b/2,liste[i].y-liste[i].h/2,liste[i].b,liste[i].h)
             let dir=atan2(liste[i].boost[1],liste[i].boost[0])
-            fill(liste[i].col2)
-            stroke(liste[i].col2)
+            pow=sqrt(liste[i].boost[0]**2 + liste[i].boost[1]**2)
+            fill(1000*pow,0,1000*pow)
+            stroke(1000*pow,0,1000*pow)
             triangle(
             liste[i].x+cos(dir)*liste[i].b/2,
             liste[i].y+sin(dir)*liste[i].h/2,
