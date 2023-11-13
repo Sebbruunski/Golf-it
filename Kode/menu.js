@@ -12,6 +12,7 @@ let nesteLevel;
 let screenWidth;
 let screenHeight;
 let soundKnap;
+
 function LevelsKnapper(){
   for(let i =0; i<bane.length;i++){
     levelsKnapper.push(createButton(i+1))
@@ -24,6 +25,7 @@ function LevelsKnapper(){
 
 
 function Buy(){
+  lyd.click.play()
   knap = floor((mouseX-levelsKnapper[0].width)*(5/width))+floor(mouseY*(5/height))*4-4
   if(coins>=3){
     coins-=3
@@ -34,11 +36,12 @@ function Buy(){
 }
 
 function SettingShow(){
-    tilbageKnap.show()
-    spilKnap.hide()
-    settingKnap.hide()
-    shopKnap.hide()
-    soundKnap[0].show()
+  lyd.click.play()
+  tilbageKnap.show()
+  spilKnap.hide()
+  settingKnap.hide()
+  shopKnap.hide()
+  soundKnap[0].show()
 }
 
 
@@ -49,6 +52,7 @@ function MellemLevels(){
 }
 
 function StartScreen(){
+  lyd.click.play()
     state = "startscreen"
     skud = 0
     ref = 0 
@@ -70,6 +74,7 @@ function StartScreen(){
 }
   
 function ShopShow(){
+  lyd.click.play()
     for(let i = 0;i<shopTing.length;i++){
       shopTing[i][1].show()
       if(chekBokse[i][0]){
@@ -87,6 +92,7 @@ function ShopShow(){
 }
 
 function levelsShow(){
+  lyd.click.play()
     for(let i =0; i<levelsKnapper.length;i++){
       levelsKnapper[i].show()
     }
@@ -97,6 +103,7 @@ function levelsShow(){
 }
 
 function ShopSetup(billedeListe){
+  lyd.click.play()
   for(let i = 0; i<billedeListe.length;i++){
     shopTing.push([billedeListe[i],createImg(billedeListe[i],"")])
     shopTing[i][1].size(width/8,height/8) 
@@ -114,6 +121,7 @@ function ShopSetup(billedeListe){
 }
 
 function NextLevel(){
+  lyd.click.play()
   if(levelNummer<bane.length-1){
     levelNummer += 1
   }
@@ -159,13 +167,16 @@ function TjekBoks(){
 }
 
 function Sounds(){
+  lyd.click.play()
   if (soundKnap[1]==false)
   {
     soundKnap[1] = true
+    lyd.click.setVolume(1.0)
   }
   else
   {
     soundKnap[1] = false
+    lyd.click.setVolume(0.0)
   }
   console.log(soundKnap[1])
 }

@@ -6,12 +6,18 @@ let cnv;              //Indeholder canvas div
 let levelCoins = [1,1,2,2,3,3,4]
 let levelMaxStroke = [2,2,2,2,2,2,2,2,2,3,3,3]
 let skud = 0;
+let lyd;
+function preload(){
+  soundFormats('wav', 'ogg');
+  lyd={click:loadSound("Sounds/Click.wav")}
+}
+
 function setup() {
   cnv = createCanvas(450, 450);
   screenHeight = windowHeight/2-canvas.height/4             //Beskrive hjørnepos af canvas iforhold til bredde.
   screenWidth = windowWidth/2-canvas.width/4                //Beskrive hjørnepos af canvas iforhold til højde.
   cnv.position(screenWidth,screenHeight)                    //Placere canvas i midten af vinduet
-  
+
   bane = [
     //bane index 0
     {obs: [
@@ -236,6 +242,7 @@ function setup() {
 
 //Bliver kaldt når der er trykket på et vilkårligt level.
 function Level(){
+  lyd.click.play()
   //finder levelet der er trykket på via mussens position
   levelNummer = floor((mouseX-levelsKnapper[0].width)*(5/width))+floor(mouseY*(5/height))*4-4 
   //hider alle knapper da spillet skal starte
@@ -265,6 +272,7 @@ function Level(){
 
 
 function draw() {
+  
   //tegner de ting der skal tegnes
   TegnDraw()
   //hvis spillet skal spilles er state play
