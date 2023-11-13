@@ -11,6 +11,7 @@ let tilbageKnap;
 let nesteLevel;
 let screenWidth;
 let screenHeight;
+let soundKnap;
 function LevelsKnapper(){
   for(let i =0; i<bane.length;i++){
     levelsKnapper.push(createButton(i+1))
@@ -37,6 +38,7 @@ function SettingShow(){
     spilKnap.hide()
     settingKnap.hide()
     shopKnap.hide()
+    soundKnap[0].show()
 }
 
 
@@ -56,6 +58,7 @@ function StartScreen(){
     spilKnap.show()
     settingKnap.show()
     shopKnap.show()
+    soundKnap[0].hide()
     for(let i =0; i<levelsKnapper.length;i++){
       levelsKnapper[i].hide()
     }
@@ -155,6 +158,17 @@ function TjekBoks(){
   }
 }
 
+function Sounds(){
+  if (soundKnap[1]==false)
+  {
+    soundKnap[1] = true
+  }
+  else
+  {
+    soundKnap[1] = false
+  }
+  console.log(soundKnap[1])
+}
 
 
 function MenuSetup(){
@@ -163,11 +177,14 @@ function MenuSetup(){
   shopKnap = createButton("Shop")
   spilKnap = createButton("Spil")
   settingKnap = createButton("Indstilling")
+  soundKnap = [createButton("Lyd"),true]
   tilbageKnap.position(0+screenWidth,7*height/8+screenHeight)
   shopKnap.position((width-shopKnap.width)/2+screenWidth,height/3+1.5*settingKnap.height+screenHeight)
   spilKnap.position((width-spilKnap.width)/2+screenWidth,height/3+screenHeight)
   settingKnap.position((width-settingKnap.width)/2+screenWidth,height/3+3*settingKnap.height+screenHeight)
   nesteLevel.position(width/2+10+screenWidth,height/2+screenHeight)
+  soundKnap[0].position((width-soundKnap[0].width)/2+screenWidth,height/2+screenHeight)
+  soundKnap[0].mousePressed(Sounds)
   spilKnap.mousePressed(levelsShow)
   shopKnap.mousePressed(ShopShow)
   tilbageKnap.mousePressed(StartScreen)
@@ -175,6 +192,7 @@ function MenuSetup(){
   nesteLevel.mousePressed(NextLevel)
   tilbageKnap.hide()
   nesteLevel.hide()
+  soundKnap[0].hide()
   shopTing = []
   ShopSetup(
     ["billeder/CowboyHat.webp","billeder/Cap.png","billeder/TopHat.webp","billeder/ChefHat.webp",
