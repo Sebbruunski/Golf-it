@@ -7,9 +7,10 @@ let levelCoins = [1,1,2,2,3,3,4]
 let levelMaxStroke = [2,2,2,2,2,2]
 let skud = 0;
 let lyd;
+
 function preload(){
   soundFormats('wav', 'ogg');
-  lyd={click:loadSound("Sounds/Click.wav")}
+  lyd=loadSound("Sounds/Click.wav")
 }
 
 function setup() {
@@ -167,7 +168,7 @@ function setup() {
 
 //Bliver kaldt når der er trykket på et vilkårligt level.
 function Level(){
-  lyd.click.play()
+  lyd.play()
   //finder levelet der er trykket på via mussens position
   levelNummer = floor((mouseX-levelsKnapper[0].width)*(5/width))+floor(mouseY*(5/height))*4-4 
   //hider alle knapper da spillet skal starte
